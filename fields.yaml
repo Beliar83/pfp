@@ -1,0 +1,8 @@
+fields:
+  field_1:
+    map: farm
+    layer: fields
+    vert_start: -10
+    vert_size: 15
+    horz_start: -8
+    horz_size: 15

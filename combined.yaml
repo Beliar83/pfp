@@ -1,0 +1,38 @@
+Actions:
+  Close: fife_rpg.actions.close
+  Lock: fife_rpg.actions.lock
+  Look: fife_rpg.actions.look
+  MoveAgent: fife_rpg.actions.move_agent
+  MoveCamera: fife_rpg.actions.move_camera
+  Open: fife_rpg.actions.open
+  PickUp: fife_rpg.actions.pick_up
+  Print: actions.print
+  Read: fife_rpg.actions.read
+  SetGlobalLight: fife_rpg.actions.set_global_light
+  Unlock: fife_rpg.actions.unlock
+Behaviours:
+  Base: fife_rpg.behaviours.base
+Components:
+  Agent: fife_rpg.components.agent
+  CharacterStatistics: fife_rpg.components.character_statistics
+  Containable: fife_rpg.components.containable
+  Container: fife_rpg.components.container
+  Crop: pixel_farm.components.crop
+  Description: fife_rpg.components.description
+  Dialogue: fife_rpg.components.dialogue
+  Equip: fife_rpg.components.equip
+  Equipable: fife_rpg.components.equipable
+  Field: pixel_farm.components.field
+  FifeAgent: fife_rpg.components.fifeagent
+  General: fife_rpg.components.general
+  Lockable: fife_rpg.components.lockable
+  MoveAgent: fife_rpg.components.move_agent
+  Moving: fife_rpg.components.moving
+  RPGEquip: fife_rpg.components.equip
+  Readable: fife_rpg.components.readable
+Systems:
+  CharacterStatisticSystem: fife_rpg.systems.character_statistics
+  Crops: pixel_farm.systems.crops
+  Fields: pixel_farm.systems.fields
+  GameVariables: fife_rpg.systems.game_variables
+  ScriptingSystem: fife_rpg.systems.scriptingsystem

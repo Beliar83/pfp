@@ -1,0 +1,18 @@
+!Entity
+Components:
+    Agent:
+        behaviour_type: Base
+        gfx: player
+        namespace: LPC
+        layer: actors
+        map: farm
+        position: [-5.0, 0.0, 0.0]
+    Description:
+        desc: It's you
+        view_name: Player
+    General:
+        identifier: PlayerCharacter
+    Moving:
+        run_speed: 1.0
+        walk_speed: 1.0
+        run_action: walk

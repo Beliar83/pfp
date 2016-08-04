@@ -1,0 +1,178 @@
+<?fife type="atlas"?>
+<atlas name="plants.png" namespace="LPC" width="288" height="384">
+    <image source="tomato_1.png" xpos="0" ypos="0" width="32" height="64"/>
+    <image source="tomato_2.png" xpos="0" ypos="64" width="32" height="64"/>
+    <image source="tomato_3.png" xpos="0" ypos="128" width="32" height="64"/>
+    <image source="tomato_4.png" xpos="0" ypos="192" width="32" height="64"/>
+    <image source="tomato_5.png" xpos="0" ypos="256" width="32" height="64"/>
+    <image source="tomato_fruit.png" xpos="0" ypos="320" width="32" height="64"/>
+    <image source="potato_1.png" xpos="32" ypos="0" width="32" height="64"/>
+    <image source="potato_2.png" xpos="32" ypos="64" width="32" height="64"/>
+    <image source="potato_3.png" xpos="32" ypos="128" width="32" height="64"/>
+    <image source="potato_4.png" xpos="32" ypos="192" width="32" height="64"/>
+    <image source="potato_5.png" xpos="32" ypos="256" width="32" height="64"/>
+    <image source="potato_fruit.png" xpos="32" ypos="320" width="32" height="64"/>
+    <image source="carrot_1.png" xpos="64" ypos="0" width="32" height="64"/>
+    <image source="carrot_2.png" xpos="64" ypos="64" width="32" height="64"/>
+    <image source="carrot_3.png" xpos="64" ypos="128" width="32" height="64"/>
+    <image source="carrot_4.png" xpos="64" ypos="192" width="32" height="64"/>
+    <image source="carrot_5.png" xpos="64" ypos="256" width="32" height="64"/>
+    <image source="carrot_fruit.png" xpos="64" ypos="320" width="32" height="64"/>
+    <image source="artichoke_1.png" xpos="96" ypos="0" width="32" height="64"/>
+    <image source="artichoke_2.png" xpos="96" ypos="64" width="32" height="64"/>
+    <image source="artichoke_3.png" xpos="96" ypos="128" width="32" height="64"/>
+    <image source="artichoke_4.png" xpos="96" ypos="192" width="32" height="64"/>
+    <image source="artichoke_5.png" xpos="96" ypos="256" width="32" height="64"/>
+    <image source="artichoke_fruit.png" xpos="96" ypos="320" width="32" height="64"/>
+    <image source="red_pepper_1.png" xpos="128" ypos="0" width="32" height="64"/>
+    <image source="red_pepper_2.png" xpos="128" ypos="64" width="32" height="64"/>
+    <image source="red_pepper_3.png" xpos="128" ypos="128" width="32" height="64"/>
+    <image source="red_pepper_4.png" xpos="128" ypos="192" width="32" height="64"/>
+    <image source="red_pepper_5.png" xpos="128" ypos="256" width="32" height="64"/>
+    <image source="red_pepper_fruit.png" xpos="128" ypos="320" width="32" height="64"/>
+    <image source="zuchini_1.png" xpos="160" ypos="0" width="32" height="64"/>
+    <image source="zuchini_2.png" xpos="160" ypos="64" width="32" height="64"/>
+    <image source="zuchini_3.png" xpos="160" ypos="128" width="32" height="64"/>
+    <image source="zuchini_4.png" xpos="160" ypos="192" width="32" height="64"/>
+    <image source="zuchini_5.png" xpos="160" ypos="256" width="32" height="64"/>
+    <image source="zuchini_fruit.png" xpos="160" ypos="320" width="32" height="64"/>
+    <image source="corn_1.png" xpos="192" ypos="0" width="32" height="64"/>
+    <image source="corn_2.png" xpos="192" ypos="64" width="32" height="64"/>
+    <image source="corn_3.png" xpos="192" ypos="128" width="32" height="64"/>
+    <image source="corn_4.png" xpos="192" ypos="192" width="32" height="64"/>
+    <image source="corn_5.png" xpos="192" ypos="256" width="32" height="64"/>
+    <image source="corn_fruit.png" xpos="192" ypos="320" width="32" height="64"/>
+</atlas>
+    
+<object id="tomato_1" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_1.png" direction="0" y_offset="-28" x_offset="2" />
+</object>
+<object id="tomato_2" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_2.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="tomato_3" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_3.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="tomato_4" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_4.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="tomato_5" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_5.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="tomato_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="tomato_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="potato_1" namespace="LPC" blocking="0" static="1">
+    <image source="potato_1.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="potato_2" namespace="LPC" blocking="0" static="1">
+    <image source="potato_2.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="potato_3" namespace="LPC" blocking="0" static="1">
+    <image source="potato_3.png" direction="0" y_offset="-28" x_offset="2"  />
+</object>
+<object id="potato_4" namespace="LPC" blocking="0" static="1">
+    <image source="potato_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="potato_5" namespace="LPC" blocking="0" static="1">
+    <image source="potato_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="potato_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="potato_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="carrot_1" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_1.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="carrot_2" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_2.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="carrot_3" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_3.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="carrot_4" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="carrot_5" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="carrot_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="carrot_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="artichoke_1" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_1.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="artichoke_2" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_2.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="artichoke_3" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_3.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="artichoke_4" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="artichoke_5" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="artichoke_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="artichoke_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="red_pepper_1" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_1.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="red_pepper_2" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_2.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="red_pepper_3" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_3.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="red_pepper_4" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="red_pepper_5" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="red_pepper_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="red_pepper_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="zuchini_1" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_1.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="zuchini_2" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_2.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="zuchini_3" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_3.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="zuchini_4" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="zuchini_5" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="zuchini_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="zuchini_fruit.png" direction="0" y_offset="-8" />
+</object>
+
+<object id="corn_1" namespace="LPC" blocking="0" static="1">
+    <image source="corn_1.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="corn_2" namespace="LPC" blocking="0" static="1">
+    <image source="corn_2.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="corn_3" namespace="LPC" blocking="0" static="1">
+    <image source="corn_3.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="corn_4" namespace="LPC" blocking="0" static="1">
+    <image source="corn_4.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="corn_5" namespace="LPC" blocking="0" static="1">
+    <image source="corn_5.png" direction="0" y_offset="-28"  x_offset="2"  />
+</object>
+<object id="corn_fruit" namespace="LPC" blocking="0" static="1">
+    <image source="corn_fruit.png" direction="0" y_offset="-8" />
+</object>

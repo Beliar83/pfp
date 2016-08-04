@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ascii" ?>
+<map id="farm" format="1.0">
+    <import file="../objects/plants.xml" />
+    <layer id="terrain" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+        <instances />
+    </layer>
+    <layer id="fields" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+        <instances />
+    </layer>
+    <layer id="items" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+        <instances />
+    </layer>
+    <layer id="crops" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+        <instances />
+    </layer>
+    <layer id="actors" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+        <instances />
+    </layer>
+    <cellcaches />
+    <camera id="main" ref_layer_id="terrain" zoom="1.000000" tilt="0.000000" rotation="0.000000" viewport="0,0,1280,720" ref_cell_width="32" ref_cell_height="32" />
+</map>

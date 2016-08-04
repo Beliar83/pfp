@@ -1,0 +1,182 @@
+<?fife type="atlas"?>
+<atlas name="pixel_farm.png" namespace="LPC" width="96" height="2048">
+    <image source="Grass_R1_C1.png" xpos="0" ypos="0" width="32" height="32"/>
+    <image source="Grass_R1_C2.png" xpos="32" ypos="0" width="32" height="32"/>
+    <image source="Grass_R1_C3.png" xpos="64" ypos="0" width="32" height="32"/>
+    <image source="Grass_R2_C1.png" xpos="0" ypos="32" width="32" height="32"/>
+    <image source="Grass_R2_C2.png" xpos="32" ypos="32" width="32" height="32"/>
+    <image source="Grass_R2_C3.png" xpos="64" ypos="32" width="32" height="32"/>
+    <image source="Grass_R3_C1.png" xpos="0" ypos="64" width="32" height="32"/>
+    <image source="Grass_R3_C2.png" xpos="32" ypos="64" width="32" height="32"/>
+    <image source="Grass_R3_C3.png" xpos="64" ypos="64" width="32" height="32"/>
+    <image source="Grass_R4_C1.png" xpos="0" ypos="96" width="32" height="32"/>
+    <image source="Grass_R4_C2.png" xpos="32" ypos="96" width="32" height="32"/>
+    <image source="Grass_R4_C3.png" xpos="64" ypos="96" width="32" height="32"/>
+    <image source="Grass_R5_C1.png" xpos="0" ypos="128" width="32" height="32"/>
+    <image source="Grass_R5_C2.png" xpos="32" ypos="128" width="32" height="32"/>
+    <image source="Grass_R5_C3.png" xpos="64" ypos="128" width="32" height="32"/>
+    <image source="Grass_R6_C1.png" xpos="0" ypos="160" width="32" height="32"/>
+    <image source="Grass_R6_C2.png" xpos="32" ypos="160" width="32" height="32"/>
+    <image source="Grass_R6_C3.png" xpos="64" ypos="160" width="32" height="32"/>
+    <image source="Soil_R1_C1.png" xpos="0" ypos="192" width="32" height="32"/>
+    <image source="Soil_R1_C2.png" xpos="32" ypos="192" width="32" height="32"/>
+    <image source="Soil_R1_C3.png" xpos="64" ypos="192" width="32" height="32"/>
+    <image source="Soil_R2_C1.png" xpos="0" ypos="224" width="32" height="32"/>
+    <image source="Soil_R2_C2.png" xpos="32" ypos="224" width="32" height="32"/>
+    <image source="Soil_R2_C3.png" xpos="64" ypos="224" width="32" height="32"/>
+    <image source="Soil_R3_C1.png" xpos="0" ypos="256" width="32" height="32"/>
+    <image source="Soil_R3_C2.png" xpos="32" ypos="256" width="32" height="32"/>
+    <image source="Soil_R3_C3.png" xpos="64" ypos="256" width="32" height="32"/>
+    <image source="Soil_R4_C1.png" xpos="0" ypos="288" width="32" height="32"/>
+    <image source="Soil_R4_C2.png" xpos="32" ypos="288" width="32" height="32"/>
+    <image source="Soil_R4_C3.png" xpos="64" ypos="288" width="32" height="32"/>
+    <image source="Soil_R5_C1.png" xpos="0" ypos="320" width="32" height="32"/>
+    <image source="Soil_R5_C2.png" xpos="32" ypos="320" width="32" height="32"/>
+    <image source="Soil_R5_C3.png" xpos="64" ypos="320" width="32" height="32"/>
+    <image source="Plowed_Soil.png" xpos="0" ypos="352" width="32" height="32"/>
+    <image source="Plowed_Soil_Watered.png" xpos="32" ypos="352" width="32" height="32"/>
+    <image source="Soil_Watered.png" xpos="64" ypos="352" width="32" height="32"/>
+    <image source="Water_Grass_R1_C1.png" xpos="0" ypos="960" width="32" height="32"/>
+    <image source="Water_Grass_R1_C2.png" xpos="32" ypos="960" width="32" height="32"/>
+    <image source="Water_Grass_R1_C3.png" xpos="64" ypos="960" width="32" height="32"/>
+    <image source="Water_Grass_R2_C1.png" xpos="0" ypos="992" width="32" height="32"/>
+    <image source="Water_Grass_R2_C2.png" xpos="32" ypos="992" width="32" height="32"/>
+    <image source="Water_Grass_R2_C3.png" xpos="64" ypos="992" width="32" height="32"/>
+    <image source="Water_Grass_R3_C1.png" xpos="0" ypos="1024" width="32" height="32"/>
+    <image source="Water_Grass_R3_C2.png" xpos="32" ypos="1024" width="32" height="32"/>
+    <image source="Water_Grass_R3_C3.png" xpos="64" ypos="1024" width="32" height="32"/>
+    <image source="Water_Grass_R4_C1.png" xpos="0" ypos="1056" width="32" height="32"/>
+    <image source="Water_Grass_R4_C2.png" xpos="32" ypos="1056" width="32" height="32"/>
+    <image source="Water_Grass_R4_C3.png" xpos="64" ypos="1056" width="32" height="32"/>
+    <image source="Water_Grass_R5_C1.png" xpos="0" ypos="1088" width="32" height="32"/>
+    <image source="Water_Grass_R5_C2.png" xpos="32" ypos="1088" width="32" height="32"/>
+    <image source="Water_Grass_R5_C3.png" xpos="64" ypos="1088" width="32" height="32"/>
+    <image source="Water_Grass_R6_C1.png" xpos="0" ypos="1120" width="32" height="32"/>
+    <image source="Water_Grass_R6_C2.png" xpos="32" ypos="1120" width="32" height="32"/>
+    <image source="Water_Grass_R6_C3.png" xpos="64" ypos="1120" width="32" height="32"/>
+    <image source="Water_R1_C1.png" xpos="0" ypos="1152" width="24" height="32"/>
+    <image source="Water_R1_C2.png" xpos="24" ypos="1152" width="24" height="32"/>
+    <image source="Water_R1_C3.png" xpos="48" ypos="1152" width="24" height="32"/>
+    <image source="Water_R1_C4.png" xpos="72" ypos="1152" width="24" height="32"/>
+    <image source="Water_R2_C1.png" xpos="0" ypos="1184" width="24" height="32"/>
+    <image source="Water_R2_C2.png" xpos="24" ypos="1184" width="24" height="32"/>
+    <image source="Water_R2_C3.png" xpos="48" ypos="1184" width="24" height="32"/>
+    <image source="Water_R2_C4.png" xpos="72" ypos="1184" width="24" height="32"/>
+    <image source="Water_R3_C1.png" xpos="0" ypos="1216" width="24" height="32"/>
+    <image source="Water_R3_C2.png" xpos="24" ypos="1216" width="24" height="32"/>
+    <image source="Water_R3_C3.png" xpos="48" ypos="1216" width="24" height="32"/>
+    <image source="Water_R3_C4.png" xpos="72" ypos="1216" width="24" height="32"/>
+    <image source="Water_R4_C1.png" xpos="0" ypos="1248" width="24" height="32"/>
+    <image source="Water_R4_C2.png" xpos="24" ypos="1248" width="24" height="32"/>
+    <image source="Water_R4_C3.png" xpos="48" ypos="1248" width="24" height="32"/>
+    <image source="Water_R4_C4.png" xpos="72" ypos="1248" width="24" height="32"/>
+    <image source="Water_R5_C1.png" xpos="0" ypos="1280" width="24" height="32"/>
+    <image source="Water_R5_C2.png" xpos="24" ypos="1280" width="24" height="32"/>
+    <image source="Water_R5_C3.png" xpos="48" ypos="1280" width="24" height="32"/>
+    <image source="Water_R5_C4.png" xpos="72" ypos="1280" width="24" height="32"/>
+    <image source="Water_R6_C1.png" xpos="0" ypos="1312" width="24" height="32"/>
+    <image source="Water_R6_C2.png" xpos="24" ypos="1312" width="24" height="32"/>
+    <image source="Water_R6_C3.png" xpos="48" ypos="1312" width="24" height="32"/>
+    <image source="Water_R6_C4.png" xpos="72" ypos="1312" width="24" height="32"/>
+    <image source="Sand_R1_C1.png" xpos="0" ypos="384" width="32" height="32"/>
+    <image source="Sand_R1_C2.png" xpos="32" ypos="384" width="32" height="32"/>
+    <image source="Sand_R1_C3.png" xpos="64" ypos="384" width="32" height="32"/>
+    <image source="Sand_R2_C1.png" xpos="0" ypos="416" width="32" height="32"/>
+    <image source="Sand_R2_C2.png" xpos="32" ypos="416" width="32" height="32"/>
+    <image source="Sand_R2_C3.png" xpos="64" ypos="416" width="32" height="32"/>
+    <image source="Sand_R3_C1.png" xpos="0" ypos="448" width="32" height="32"/>
+    <image source="Sand_R3_C2.png" xpos="32" ypos="448" width="32" height="32"/>
+    <image source="Sand_R3_C3.png" xpos="64" ypos="448" width="32" height="32"/>
+    <image source="Sand_R4_C1.png" xpos="0" ypos="480" width="32" height="32"/>
+    <image source="Sand_R4_C2.png" xpos="32" ypos="480" width="32" height="32"/>
+    <image source="Sand_R4_C3.png" xpos="64" ypos="480" width="32" height="32"/>
+    <image source="Sand_R5_C1.png" xpos="0" ypos="512" width="32" height="32"/>
+    <image source="Sand_R5_C2.png" xpos="32" ypos="512" width="32" height="32"/>
+    <image source="Sand_R5_C3.png" xpos="64" ypos="512" width="32" height="32"/>
+    <image source="Sand_R6_C1.png" xpos="0" ypos="544" width="32" height="32"/>
+    <image source="Sand_R6_C2.png" xpos="32" ypos="544" width="32" height="32"/>
+    <image source="Sand_R6_C3.png" xpos="64" ypos="544" width="32" height="32"/>
+    <image source="Sand_Water_R1_C1.png" xpos="0" ypos="576" width="32" height="32"/>
+    <image source="Sand_Water_R1_C2.png" xpos="32" ypos="576" width="32" height="32"/>
+    <image source="Sand_Water_R1_C3.png" xpos="64" ypos="576" width="32" height="32"/>
+    <image source="Sand_Water_R2_C1.png" xpos="0" ypos="608" width="32" height="32"/>
+    <image source="Sand_Water_R2_C2.png" xpos="32" ypos="608" width="32" height="32"/>
+    <image source="Sand_Water_R2_C3.png" xpos="64" ypos="608" width="32" height="32"/>
+    <image source="Sand_Water_R3_C1.png" xpos="0" ypos="640" width="32" height="32"/>
+    <image source="Sand_Water_R3_C2.png" xpos="32" ypos="640" width="32" height="32"/>
+    <image source="Sand_Water_R3_C3.png" xpos="64" ypos="640" width="32" height="32"/>
+    <image source="Sand_Water_R4_C1.png" xpos="0" ypos="672" width="32" height="32"/>
+    <image source="Sand_Water_R4_C2.png" xpos="32" ypos="672" width="32" height="32"/>
+    <image source="Sand_Water_R4_C3.png" xpos="64" ypos="672" width="32" height="32"/>
+    <image source="Sand_Water_R5_C1.png" xpos="0" ypos="704" width="32" height="32"/>
+    <image source="Sand_Water_R5_C2.png" xpos="32" ypos="704" width="32" height="32"/>
+    <image source="Sand_Water_R5_C3.png" xpos="64" ypos="704" width="32" height="32"/>
+    <image source="Sand_Water_R6_C1.png" xpos="0" ypos="736" width="32" height="32"/>
+    <image source="Sand_Water_R6_C2.png" xpos="32" ypos="736" width="32" height="32"/>
+    <image source="Sand_Water_R6_C3.png" xpos="64" ypos="736" width="32" height="32"/>
+</atlas>
+
+<object id="grass:01" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R4_C2.png" direction="0" />
+</object>
+<object id="grass:02" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R6_C1.png" direction="0" />
+</object>
+<object id="grass:03" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R6_C2.png" direction="0" />
+</object>
+<object id="grass:04" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R6_C3.png" direction="0" />
+</object>
+<object id="grass/black" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R5_C2.png" direction="0" />
+    <image source="Grass_R1_C3.png" direction="45" />
+    <image source="Grass_R4_C1.png" direction="90" />
+    <image source="Grass_R2_C3.png" direction="135" />
+    <image source="Grass_R3_C2.png" direction="180" />
+    <image source="Grass_R2_C2.png" direction="225" />
+    <image source="Grass_R4_C3.png" direction="270" />
+    <image source="Grass_R1_C2.png" direction="315" />
+</object>
+<object id="black/grass" namespace="LPC" blocking="0" static="1">
+    <image source="Grass_R3_C2.png" direction="0" />
+    <image source="Grass_R3_C3.png" direction="45" />
+    <image source="Grass_R4_C3.png" direction="90" />
+    <image source="Grass_R5_C3.png" direction="135" />
+    <image source="Grass_R5_C2.png" direction="180" />
+    <image source="Grass_R5_C1.png" direction="225" />
+    <image source="Grass_R4_C1.png" direction="270" />
+    <image source="Grass_R3_C1.png" direction="315" />
+</object>
+<object id="plowed_soil" namespace="LPC" blocking="0" static="1">
+    <image source="Plowed_Soil.png" direction="0" />
+</object>
+<object id="plowed_soil_watered" namespace="LPC" blocking="0" static="1">
+    <image source="Plowed_Soil_Watered.png" direction="0" />
+</object>
+<object id="soil:01" namespace="LPC" blocking="0" static="1">
+    <image source="Soil_R4_C2.png" direction="0" />
+</object>
+<object id="soil_watered" namespace="LPC" blocking="0" static="1">
+    <image source="Soil_Watered.png" direction="0" />
+</object>
+<object id="soil/grass" namespace="LPC" blocking="0" static="1">
+    <image source="Soil_R5_C2.png" direction="0" />
+    <image source="Soil_R1_C3.png" direction="45" />
+    <image source="Soil_R4_C1.png" direction="90" />
+    <image source="Soil_R2_C3.png" direction="135" />
+    <image source="Soil_R3_C2.png" direction="180" />
+    <image source="Soil_R2_C2.png" direction="225" />
+    <image source="Soil_R4_C3.png" direction="270" />
+    <image source="Soil_R1_C2.png" direction="315" />
+</object>
+<object id="grass/soil" namespace="LPC" blocking="0" static="1">
+    <image source="Soil_R3_C2.png" direction="0" />
+    <image source="Soil_R3_C3.png" direction="45" />
+    <image source="Soil_R4_C3.png" direction="90" />
+    <image source="Soil_R5_C3.png" direction="135" />
+    <image source="Soil_R5_C2.png" direction="180" />
+    <image source="Soil_R5_C1.png" direction="225" />
+    <image source="Soil_R4_C1.png" direction="270" />
+    <image source="Soil_R3_C1.png" direction="315" />
+</object>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="Ingame" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MousePassThroughEnabled" value="True" />
+        <Window type="GridLayoutContainer" name="SelectGrid" >
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{0,32}}" />
+            <Property name="GridSize" value="w:1 h:1" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="HorizontalAlignment" value="Right" />
+            <AutoWindow namePath="__auto_dummy_0" >
+                <Property name="Visible" value="false" />
+            </AutoWindow>
+        </Window>
+    </Window>
+</GUILayout>
