@@ -27,10 +27,15 @@ from fife import fife
 import fife_rpg
 from fife_rpg.game_scene import (GameSceneController, GameSceneView,
                                  GameSceneListener)
+from fife_rpg.helpers import Enum
+
 from .gui.selection_grid import SelectionGrid
 
 from .components.field import Field
 from .helper import get_offset_rect
+
+
+TOOLS = Enum(("WateringCan", "Plow", "Seeds"))
 
 
 class Listener(GameSceneListener, fife.IKeyListener):
@@ -64,8 +69,71 @@ class Listener(GameSceneListener, fife.IKeyListener):
             self.gamecontroller.selected = entity
             self.gamecontroller.update_selector(instance)
 
+    def mousePressed(self, event):
+        GameSceneListener.mousePressed(self, event)
+        selected = self.gamecontroller.selected
+        if selected:
+            mouse_cell = self.gamecontroller.view.select_grid.mouse_cell
+            cell_rect = self.gamecontroller.view.select_grid.cell_rect
+            #: :type cell_rect: PyCEGUI.Rectf
+            mouse_pos = fife.Point(*mouse_cell)
+            rect = fife.Rect(int(cell_rect.d_min.d_x),
+                             int(cell_rect.d_min.d_y),
+                             int(cell_rect.getWidth()) + 1,
+                             int(cell_rect.getHeight() + 1))
+            rect = get_offset_rect(rect, mouse_pos)
+
+            if self.gamecontroller.tool == TOOLS.WateringCan:
+                self.water(selected, rect)
+            elif self.gamecontroller.tool == TOOLS.Seeds:
+                self.plant(selected, rect, "tomato")
+            elif self.gamecontroller.tool == TOOLS.Plow:
+                self.plow(selected, rect)
+
     def keyPressed(self, event):
         pass
+
+    def sweep_yield(self, rect, yield_center=True):
+        """Yields each coordinate in the rectangle starting from the leftmost
+        centre column and goes around clockwise. The rectangle is processed
+        per column and from left to right and bottom to top for the top half
+        and from right to left and top to bottom for the bottom half of the
+        rectangle.
+
+        Parameters
+        ----------
+        rect : fife.Rect
+            A rectangle with the coordinates to be yielded
+
+        Yields
+        ------
+        y_pos : int
+            The vertical position
+        x_pos : int
+            The horizontal position
+        yield_center : bool
+            Whether to include the center coordinates(0,0) or not.
+        """
+        #: :type rect: fife.Rect
+        x_start = rect.getX()
+        x_end = rect.right()
+        y_start = rect.bottom() - 1
+        y_end = rect.getY() - 1
+        if y_end < 0 and y_start > 0 or y_start < 0 and y_end > 0:
+            for x in xrange(x_start, x_end, 1):
+                for y in xrange(0, y_end, -1):
+                    if y == 0 and x == 0:
+                        continue
+                    yield y, x
+            for x in xrange(x_end - 1, x_start - 1, -1):
+                for y in xrange(1, y_start + 1, 1):
+                    yield y, x
+        else:
+            for x in xrange(x_start, x_end, 1):
+                for y in xrange(y_start, y_end, -1):
+                    if y == 0 and x == 0:
+                        continue
+                    yield y, x
 
     def water(self, selected, rect, water=-1):
         """Add water to fields in a rectangle around an entity
@@ -81,88 +149,125 @@ class Listener(GameSceneListener, fife.IKeyListener):
             Amount of available water, 1 unit per field. If set to -1 it will
             be ignored.
         """
+        #: :type rect: fife.Rect
         gc = self.gamecontroller
         direction = gc.selection_direction
 
-        #: :type rect: fife.Rect
-        x_start = rect.getX()
-        x_end = rect.right()
-        y_start = rect.bottom() - 1
-        y_end = rect.getY() - 1
         sel_instance = selected.FifeAgent.instance
         world = gc.application.world
         #: :type world: fife_rpg.RPGWorld
-        if y_end < 0 and y_start > 0 or y_start < 0 and y_end > 0:
-            for x in xrange(x_start, x_end, 1):
-                for y in xrange(0, y_end, -1):
-                    if water == 0:
-                        break
-                    if water < -1:
-                        water = -1  # Just to be on the safe side
-                    y_pos, x_pos = gc.get_rotated_cell_offset_coord(
-                        y, x, direction)
-                    instances = gc.get_instances_at_offset(
-                        sel_instance, y_pos, x_pos)
-                    for instance in instances:
-                        entity = world.get_entity(instance.getId())
-                        if entity.Field:
-                            entity.Field.water += 1
-                            water = water - 1
-            for x in xrange(x_end - 1, x_start - 1, -1):
-                for y in xrange(1, y_start + 1, 1):
-                    if water == 0:
-                        break
-                    y_pos, x_pos = gc.get_rotated_cell_offset_coord(
-                        y, x, direction)
-                    instances = gc.get_instances_at_offset(
-                        sel_instance, y_pos, x_pos)
-                    for instance in instances:
-                        entity = world.get_entity(instance.getId())
-                        if entity.Field:
-                            entity.Field.water += 1
-                            water = water - 1
+        if rect.getH() == 1 and rect.getW() == 1:
+            fields = ((0, 0),)
         else:
-            for x in xrange(x_start, x_end, 1):
-                for y in xrange(y_start, y_end, -1):
-                    if water == 0:
-                        break
-                    y_pos, x_pos = gc.get_rotated_cell_offset_coord(
-                        y, x, direction)
-                    instances = gc.get_instances_at_offset(
-                        sel_instance, y_pos, x_pos)
-                    for instance in instances:
-                        #: :type instance: fife.Instance
-                        entity = world.get_entity(instance.getId())
-                        if entity.Field:
-                            entity.Field.water += 1
-                            water = water - 1
+            fields = self.sweep_yield(rect, False)
+        for y, x in fields:
+            if water == 0:
+                break
+            if water < -1:
+                water = -1  # Just to be on the safe side
+            y_pos, x_pos = gc.get_rotated_cell_offset_coord(
+                y, x, direction)
+            gc = self.gamecontroller
+            sel_instance = selected.FifeAgent.instance
+            world = gc.application.world
+            instances = gc.get_instances_at_offset(
+                sel_instance, y_pos, x_pos)
+            for instance in instances:
+                entity = world.get_entity(instance.getId())
+                if entity.Field:
+                    entity.Field.water += 1
+                    water = water - 1
+
+    def plant(self, selected, rect, crop, seeds=-1):
+        """Plant the crop in a rectangle around an entity
+
+        Parameters
+        ----------
+        selected : fife_rpg.RPGEntity
+            The entity that is the origin point of the planting.
+        rect : fife.Rect
+            A rectangle with offset coordinates to the fields to be seeded.
+        crop : str
+            The name of the crop to plant
+        seeds: int
+            Amount of available seeds, 1 unit per field. If set to -1 it will
+            be ignored.
+        """
+        #: :type rect: fife.Rect
+        gc = self.gamecontroller
+        direction = gc.selection_direction
+
+        sel_instance = selected.FifeAgent.instance
+        world = gc.application.world
+        #: :type world: fife_rpg.RPGWorld
+        if rect.getH() == 1 and rect.getW() == 1:
+            fields = ((0, 0),)
+        else:
+            fields = self.sweep_yield(rect, False)
+        for y, x in fields:
+            if seeds == 0:
+                break
+            if seeds < -1:
+                seeds = -1  # Just to be on the safe side
+            y_pos, x_pos = gc.get_rotated_cell_offset_coord(
+                y, x, direction)
+            gc = self.gamecontroller
+            sel_instance = selected.FifeAgent.instance
+            world = gc.application.world
+            instances = gc.get_instances_at_offset(
+                sel_instance, y_pos, x_pos)
+            for instance in instances:
+                entity = world.get_entity(instance.getId())
+                if entity.Field:
+                    world.systems.Crops.plant_crop(entity, crop)
+
+    def plow(self, selected, rect):
+        """Plough the fields around the selected entity
+
+        Parameters
+        ----------
+        selected : fife_rpg.RPGEntity
+            The entity that is the origin point of the ploughing.
+        rect : fife.Rect
+            A rectangle with offset coordinates to the fields to be ploughed.
+        """
+        #: :type rect: fife.Rect
+        gc = self.gamecontroller
+        direction = gc.selection_direction
+
+        sel_instance = selected.FifeAgent.instance
+        world = gc.application.world
+        #: :type world: fife_rpg.RPGWorld
+        if rect.getH() == 1 and rect.getW() == 1:
+            fields = ((0, 0),)
+        else:
+            fields = self.sweep_yield(rect, False)
+        for y, x in fields:
+            y_pos, x_pos = gc.get_rotated_cell_offset_coord(
+                y, x, direction)
+            gc = self.gamecontroller
+            sel_instance = selected.FifeAgent.instance
+            world = gc.application.world
+            instances = gc.get_instances_at_offset(
+                sel_instance, y_pos, x_pos)
+            for instance in instances:
+                entity = world.get_entity(instance.getId())
+                if entity.Field:
+                    entity.Field.plowed = True
 
     def keyReleased(self, event):
         assert isinstance(event, fife.KeyEvent)
         key = event.getKey().getValue()
         selected = self.gamecontroller.selected
         if key == fife.Key.P:
-            if selected:
-                selected.Field.plowed = True
+            self.gamecontroller.tool = TOOLS.Plow
+            self.gamecontroller.view.select_grid.recreate_grid(3, 3, False)
         elif key == fife.Key.C:
-            if selected:
-                if not selected.Crop and selected.Field.plowed:
-                    application = self.gamecontroller.application
-                    application.world.systems.Crops.plant_crop(selected,
-                                                               "tomato")
+            self.gamecontroller.tool = TOOLS.Seeds
+            self.gamecontroller.view.select_grid.recreate_grid(3, 3, True)
         elif key == fife.Key.W:
-            if selected:
-                mouse_cell = self.gamecontroller.view.select_grid.mouse_cell
-                cell_rect = self.gamecontroller.view.select_grid.cell_rect
-                #: :type cell_rect: PyCEGUI.Rectf
-                mouse_pos = fife.Point(*mouse_cell)
-                rect = fife.Rect(int(cell_rect.d_min.d_x),
-                                 int(cell_rect.d_min.d_y),
-                                 int(cell_rect.getWidth()) + 1,
-                                 int(cell_rect.getHeight() + 1))
-                rect = get_offset_rect(rect, mouse_pos)
-
-                self.water(selected, rect)
+            self.gamecontroller.tool = TOOLS.WateringCan
+            self.gamecontroller.view.select_grid.recreate_grid(3, 3, True)
         elif key == fife.Key.S:
             if selected:
                 selected.Field.sun += 1
@@ -203,6 +308,7 @@ class Controller(GameSceneController):
             self, view, application, outliner, listener)
         self.selected = None
         self.selection_direction = 0
+        self.tool = TOOLS.Plow
 
     def pump(self, time_delta):
         GameSceneController.pump(self, time_delta)
