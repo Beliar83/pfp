@@ -36,7 +36,7 @@ class SelectionGrid(object):
     cells : list of CellData
         Cell data for each cell.
     cell_rect : PyCEGUI.Rectf
-        Rectangle describing the selected clls
+        Rectangle describing the selected cells
     last_hovered : int
         The index of the last hovered cell
     mouse_cell : list of int
@@ -213,22 +213,26 @@ class SelectionGrid(object):
         self.mouse_cell = (col, row)
 
     def is_selection_valid(self, rect):
-        """Check whether a selection is valid (at least one cell is near
-        the mouse cell
+        """Check whether a selection is valid - at least one cell is near
+        the mouse cell and no cell in the same row if reach behind is not
+        active
 
         Parameters
         ----------
-        rect : PyCGUI.Rectf
+        rect : PyCEGUI.Rectf
             The selection rectangle to check
         Returns
         -------
         bool
-            True if the selection is valid, otherwise alse
+            True if the selection is valid, otherwise False
         """
         in_rect = rect.isPointInRect
         mouse_col, mouse_row = self.mouse_cell
         Vec2f = PyCEGUI.Vector2f
         is_mouse_near_selection = False
+        #: :type rect: PyCGUI.Rectf
+        if not self.reach_behind and int(rect.bottom()) >= mouse_row:
+            return False
         if mouse_col > 0 and in_rect(Vec2f(mouse_col - 1, mouse_row)):
             is_mouse_near_selection = True
         elif (mouse_col < self.cell_width and
