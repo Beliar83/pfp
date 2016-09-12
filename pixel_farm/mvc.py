@@ -70,12 +70,13 @@ class Listener(GameSceneListener, fife.IKeyListener):
     def water(self, selected, rect, water=-1):
         """Add water to fields in a rectangle around an entity
 
+
+        Parameters
+        ----------
         selected : fife_rpg.RPGEntity
             The entity that is the origin point of the watering.
-
         rect : fife.Rect
             A rectangle with offset coordinates to the fields to be watered.
-
         water: int
             Amount of available water, 1 unit per field. If set to -1 it will
             be ignored.
@@ -217,6 +218,9 @@ class Controller(GameSceneController):
     def rotate_selection(self, right):
         """Rotate the selection in the given direction
 
+
+        Parameters
+        ----------
         right : bool
             True to rotate right, False to roate left
         """
@@ -236,12 +240,15 @@ class Controller(GameSceneController):
 
         The original rectangle is assumed to be pointing up.
 
+        Parameters
+        ----------
         rect : fife.Rect
-
         direction : int
             The direction to be rotated to. (0: Up, 1: Right, 2: Down, 3: Left)
 
-        Returns : fife.Rect
+        Returns
+        -------
+        fife.Rect
             The rotated rectangle
         """
         if direction == 1:
@@ -264,17 +271,19 @@ class Controller(GameSceneController):
     def get_rotated_cell_offset_coord(self, y_pos, x_pos, direction):
         """Returns the cell offset coordinate rotated to match the direction.
 
+        Parameters
+        ----------
         y_pos : number
             The original y position.
-
         x_pos : number
             The original x position.
-
         direction : int
             The direction to rotate to. Origin position is 0 (north) and goes
             clockwise (east=1, south=2, west=3)
 
-        Returns : tuple of numbers
+        Returns
+        -------
+        tuple of numbers
             The modified coordinates
         """
         if direction == 1:
@@ -288,16 +297,18 @@ class Controller(GameSceneController):
     def get_instances_at_offset(self, instance, y_pos, x_pos):
         """Returns all instances at the offset position from the instance
 
+        Parameters
+        ----------
         instance : fife.Instance
             The origin instance
-
         y_pos : int
             The y offset from the instance
-
         x_pod : int
             The x offseet from the instance
 
-        Returns : list of fife.Instance
+        Returns
+        -------
+        list of fife.Instance
             The instances at the offset position
         """
         camera = self.application.current_map.camera
@@ -318,13 +329,16 @@ class Controller(GameSceneController):
         The (0, 0) position of the rectangle. is where the instance is. It does
         not need to be inside the rectangle.
 
+        Parameters
+        ----------
         instance : fife.Instance
             The instance which is the origin point of the rectangle.
-
         rect : fife.Rect
             The rectangle inside which the instances should be.
 
-        Returns: list of fife.Instance
+        Returns
+        -------
+        list of fife.Instance
             The instances inside the rectangle
         """
 
