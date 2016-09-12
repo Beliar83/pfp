@@ -167,7 +167,7 @@ class SelectionGrid(object):
                                                 args, row, col))
 
                     self.grid_widget.addChildToPosition(new_cell, col, row)
-                    self.cells.append(CellData())
+                self.cells.append(CellData())
         self.cells[0].selected = True
         self.cell_rect.d_min = PyCEGUI.Vector2f(0, 0)
         self.cell_rect.d_max = PyCEGUI.Vector2f(0.9, 0.9)
