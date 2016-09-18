@@ -20,7 +20,7 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
-from __future__ import absolute_import
+
 
 from fife_rpg.components.base import Base
 
@@ -45,7 +45,7 @@ class Field(Base):
     @property
     def saveable_fields(self):
         """Returns the fields of the component that can be saved."""
-        fields = self.fields.keys()
+        fields = list(self.fields.keys())
         return fields
 
     @classmethod

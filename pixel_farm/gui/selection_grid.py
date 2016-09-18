@@ -76,8 +76,8 @@ class SelectionGrid(object):
         height = self.grid_widget.getGridHeight()
         width = self.grid_widget.getGridWidth()
         rect = self.drag_rect if self.dragging else self.cell_rect
-        for row in xrange(height):
-            for col in xrange(width):
+        for row in range(height):
+            for col in range(width):
                 cell = self.grid_widget.getChildAtPosition(col, row)
                 cell_index = row * width + col
                 #: :type cell_data: CellData
@@ -130,8 +130,8 @@ class SelectionGrid(object):
         new_size.d_height = self.cell_height * height
         self.grid_widget.setSize(new_size)
         self.cells = []
-        for row in xrange(height):
-            for col in xrange(width):
+        for row in range(height):
+            for col in range(width):
                 cell = self.grid_widget.getChildAtPosition(col, row)
                 assert isinstance(cell, PyCEGUI.Window)
                 if cell.getType() != "TaharezLook/StaticImage":
@@ -188,8 +188,8 @@ class SelectionGrid(object):
 
         self.mouse_cell = (-1, -1)
 
-        for row in xrange(sel_start_row, sel_start_row + sel_rows):
-            for col in xrange(sel_start_col, sel_start_col + sel_cols):
+        for row in range(sel_start_row, sel_start_row + sel_rows):
+            for col in range(sel_start_col, sel_start_col + sel_cols):
                 cell_index = row * width + col
                 cell = self.cells[cell_index]
                 #: :type cell: CellData
@@ -235,13 +235,13 @@ class SelectionGrid(object):
             return False
         if mouse_col > 0 and in_rect(Vec2f(mouse_col - 1, mouse_row)):
             is_mouse_near_selection = True
-        elif (mouse_col < self.cell_width and
+        elif (mouse_col < self.cell_width.d_offset and
               in_rect(Vec2f(mouse_col + 1, mouse_row))):
             is_mouse_near_selection = True
         elif (mouse_row > 0 and
               in_rect(Vec2f(mouse_col, mouse_row - 1))):
             is_mouse_near_selection = True
-        elif (mouse_row < self.cell_height and
+        elif (mouse_row < self.cell_height.d_offset and
               in_rect(Vec2f(mouse_col, mouse_row + 1))):
             is_mouse_near_selection = True
         return is_mouse_near_selection

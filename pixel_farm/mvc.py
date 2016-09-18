@@ -20,7 +20,7 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
-from __future__ import absolute_import
+
 
 import PyCEGUI
 from fife import fife
@@ -120,17 +120,17 @@ class Listener(GameSceneListener, fife.IKeyListener):
         y_start = rect.bottom() - 1
         y_end = rect.getY() - 1
         if y_end < 0 and y_start > 0 or y_start < 0 and y_end > 0:
-            for x in xrange(x_start, x_end, 1):
-                for y in xrange(0, y_end, -1):
+            for x in range(x_start, x_end, 1):
+                for y in range(0, y_end, -1):
                     if y == 0 and x == 0:
                         continue
                     yield y, x
-            for x in xrange(x_end - 1, x_start - 1, -1):
-                for y in xrange(1, y_start + 1, 1):
+            for x in range(x_end - 1, x_start - 1, -1):
+                for y in range(1, y_start + 1, 1):
                     yield y, x
         else:
-            for x in xrange(x_start, x_end, 1):
-                for y in xrange(y_start, y_end, -1):
+            for x in range(x_start, x_end, 1):
+                for y in range(y_start, y_end, -1):
                     if y == 0 and x == 0:
                         continue
                     yield y, x
@@ -271,7 +271,7 @@ class Listener(GameSceneListener, fife.IKeyListener):
         elif key == fife.Key.S:
             if selected:
                 selected.Field.sun += 1
-                print selected.Field.sun
+                print(selected.Field.sun)
         elif key == fife.Key.D:
             if selected:
                 application = self.gamecontroller.application
@@ -280,10 +280,10 @@ class Listener(GameSceneListener, fife.IKeyListener):
                 identifier = "%s_crop" % selected.identifier
                 crop = world.get_entity(identifier)
                 if crop:
-                    print "water %d. sun %d, days %d" % (crop.Crop.water,
+                    print("water %d. sun %d, days %d" % (crop.Crop.water,
                                                          crop.Crop.sun,
-                                                         crop.Crop.days)
-                    print crop.Crop.stage
+                                                         crop.Crop.days))
+                    print(crop.Crop.stage)
         elif key == fife.Key.H:
             if selected:
                 application = self.gamecontroller.application
@@ -310,8 +310,8 @@ class Controller(GameSceneController):
         self.selection_direction = 0
         self.tool = TOOLS.Plow
 
-    def pump(self, time_delta):
-        GameSceneController.pump(self, time_delta)
+    def step(self, time_delta):
+        GameSceneController.step(self, time_delta)
         self.update_selector()
         self.view.select_grid.update_grid()
 
@@ -456,8 +456,8 @@ class Controller(GameSceneController):
         world = application.world
         #: :type world: fife_rpg.RPGWorld
         instances = []
-        for row in xrange(start_row, start_row + height):
-            for col in xrange(start_col, start_col + width):
+        for row in range(start_row, start_row + height):
+            for col in range(start_col, start_col + width):
                 y_pos, x_pos = self.get_rotated_cell_offset_coord(
                     row, col, self.selection_direction)
                 offset_instances = self.get_instances_at_offset(

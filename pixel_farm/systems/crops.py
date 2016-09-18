@@ -21,7 +21,7 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
-from __future__ import absolute_import
+
 
 from fife_rpg.systems import Base
 from fife_rpg.components.agent import Agent
@@ -107,7 +107,7 @@ class Crops(Base):
 
             fruit: Name of the fruit
         """
-        if isinstance(field, basestring):
+        if isinstance(field, str):
             field = self.world.get_entity(field)
         fruit_data = self.fruits[fruit]
         stage_data = fruit_data["stages"][0]

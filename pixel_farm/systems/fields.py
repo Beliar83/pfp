@@ -21,7 +21,7 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
-from __future__ import absolute_import
+
 
 import yaml
 
@@ -90,7 +90,7 @@ class Fields(Base):
         if self.world.is_identifier_used("%s_0_0" % field_name):
             return
 
-        for i in xrange(field_data["vert_size"]):
+        for i in range(field_data["vert_size"]):
             identifier = "%s_border_left_%d" % (field_name, i)
             comp_data = {}
             agent_data = comp_data[agent_c_name] = {}
@@ -146,7 +146,7 @@ class Fields(Base):
         agent_data["rotation"] = 315
         self.world.get_or_create_entity(identifier, comp_data)
 
-        for i in xrange(field_data["horz_size"]):
+        for i in range(field_data["horz_size"]):
             identifier = "%s_border_top_%d" % (field_name, i)
             comp_data = {}
             agent_data = comp_data[agent_c_name] = {}
@@ -166,8 +166,8 @@ class Fields(Base):
             identifier = "%s_border_bottom_%d" % (field_name, i)
             self.world.get_or_create_entity(identifier, comp_data)
 
-        for i in xrange(field_data["vert_size"]):
-            for j in xrange(field_data["horz_size"]):
+        for i in range(field_data["vert_size"]):
+            for j in range(field_data["horz_size"]):
                 identifier = "%s_%d_%d" % (field_name, i, j)
                 if self.world.is_identifier_used(identifier):
                     continue
@@ -188,11 +188,11 @@ class Fields(Base):
 
     def step(self, dt):
         Base.step(self, dt)
-        for field_name in self.fields.iterkeys():
+        for field_name in self.fields.keys():
             field_data = self.fields[field_name]
             self.setup_field(field_name, field_data)
-            for i in xrange(field_data["vert_size"]):
-                for j in xrange(field_data["horz_size"]):
+            for i in range(field_data["vert_size"]):
+                for j in range(field_data["horz_size"]):
                     field_c_name = Field.registered_as
                     agent_c_name = Agent.registered_as
                     identifier = "%s_%d_%d" % (field_name, i, j)
@@ -202,7 +202,7 @@ class Fields(Base):
                     try:
                         is_plowed = field.plowed
                     except AttributeError:
-                        print identifier
+                        print(identifier)
                     is_watered = field.water > 0
                     if is_plowed:
                         if is_watered:
