@@ -319,7 +319,7 @@ class Controller(GameSceneController):
         super(Controller, self).on_activate()
         PyCEGUI.System.getSingleton().getDefaultGUIContext().setRootWindow(
             self.view.ingame)
-        self.view.select_grid.recreate_grid(3, 3, True)
+        self.view.select_grid.recreate_grid(3, 3, False)
 
     def rotate_selection(self, right):
         """Rotate the selection in the given direction
