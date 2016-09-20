@@ -44,7 +44,7 @@ class WaterContainer(Base):
 
         Parameters
         ----------
-        name : basestring
+        name : str
             The name under which the class should be registered
 
         auto_register : bool
