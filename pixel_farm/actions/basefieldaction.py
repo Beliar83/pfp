@@ -5,15 +5,19 @@
 
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
+from abc import ABCMeta, abstractmethod
 
+import six
 from fife import fife
 
 import fife_rpg
 from fife_rpg.actions.base import BaseAction
 from pixel_farm.components.field import Field
+from pixel_farm.helper import (sweep_yield, get_rotated_cell_offset_coord,
+                               get_instances_at_offset)
 
 
-class BaseFieldAction(BaseAction):
+class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
     """Base action for actions done to fields around a rectangle
 
     Attributes
@@ -60,3 +64,51 @@ class BaseFieldAction(BaseAction):
         self.origin = origin
         self.rect = rect
         self.direction = direction
+
+    @property
+    @abstractmethod
+    def can_continue(self):
+        """Whether the field action can be continued or not
+
+        Returns
+        -------
+        bool
+        """
+
+    @abstractmethod
+    def do_field_action(self, field):
+        """Do an an action to a field
+
+        Parameters
+        ----------
+        field : Field
+            The field to do an action on
+        """
+
+    def execute(self):
+        """Execute the action
+
+        Raises
+        ------
+        fife_rpg.exceptions.NoSuchCommandError
+            If a command is detected that is not registered.
+        """
+        world = self.application.world
+        origin_instance = self.origin.FifeAgent.instance
+        if self.rect.getH() == 1 and self.rect.getW() == 1:
+            fields = ((0, 0),)
+        else:
+            fields = sweep_yield(self.rect, False)
+        for y, x in fields:
+            y_pos, x_pos = get_rotated_cell_offset_coord(
+                y, x, self.direction)
+            instances = get_instances_at_offset(
+                self.application.current_map.camera,
+                origin_instance, y_pos, x_pos)
+            for instance in instances:
+                entity = world.get_entity(instance.getId())
+                if entity.Field:
+                    self.do_field_action(entity.Field)
+            if not self.can_continue:
+                break
+        super().execute()

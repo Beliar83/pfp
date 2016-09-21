@@ -10,8 +10,6 @@ from fife import fife
 
 import fife_rpg
 from pixel_farm.components.water_container import WaterContainer
-from pixel_farm.helper import (sweep_yield, get_rotated_cell_offset_coord,
-                               get_instances_at_offset)
 from .basefieldaction import BaseFieldAction
 
 
@@ -68,38 +66,23 @@ class Water(BaseFieldAction):
         super().__init__(application, origin, rect, direction, commands)
         self.container = container
 
-    def execute(self):
-        """Execute the action
+    @property
+    def can_continue(self):
+        """Whether the field action can be continued or not
 
-        Raises
-        ------
-        fife_rpg.exceptions.NoSuchCommandError
-            If a command is detected that is not registered.
+        Returns
+        -------
+        bool
         """
+        return self.container.water != 0
 
-        world = self.application.world
-        origin_instance = self.origin.FifeAgent.instance
-        if self.rect.getH() == 1 and self.rect.getW() == 1:
-            fields = ((0, 0),)
-        else:
-            fields = sweep_yield(self.rect, False)
-        for y, x in fields:
-            if self.container.water == 0:
-                break
-            if self.container.water < -1:
-                water = -1  # Just to be on the safe side
-            y_pos, x_pos = get_rotated_cell_offset_coord(
-                y, x, self.direction)
-            world = self.application.world
-            instances = get_instances_at_offset(
-                self.application.current_map.camera,
-                origin_instance, y_pos, x_pos)
-            for instance in instances:
-                entity = world.get_entity(instance.getId())
-                if entity.Field:
-                    entity.Field.water += 1
-                    self.container.water -= 1
-        super().execute()
+    def do_field_action(self, field):
+        if not self.can_continue:
+            return
+        field.water += 1
+        self.container.water -= 1
+        if self.container.water < -1:
+            water = -1  # Just to be on the safe side
 
     @classmethod
     def register(cls, name="Water"):
