@@ -21,11 +21,8 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
-
-
-from fife_rpg.systems import Base
 from fife_rpg.components.agent import Agent
-
+from fife_rpg.systems import Base
 from pixel_farm.components.crop import Crop, add_days
 from pixel_farm.components.field import Field
 
@@ -109,6 +106,9 @@ class Crops(Base):
         """
         if isinstance(field, str):
             field = self.world.get_entity(field)
+        field_comp = getattr(field, Field.registered_as)
+        if field_comp.has_plant:
+            return
         fruit_data = self.fruits[fruit]
         stage_data = fruit_data["stages"][0]
         comp_data = {}
@@ -125,6 +125,7 @@ class Crops(Base):
         crop_data["field_id"] = field.identifier
         identifier = "%s_crop" % field.identifier
         self.world.get_or_create_entity(identifier, comp_data)
+        field_comp.has_plant = True
 
     def advance_day(self):
         """Advance all crops by one day"""

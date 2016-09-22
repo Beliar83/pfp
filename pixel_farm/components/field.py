@@ -29,24 +29,23 @@ class Field(Base):
 
     """Component that defines field data
 
-    Fields:
+    Attributes
+    ------
+    plowed : bool
+        Is the field plowed?
 
-        plowed: Is the field plowed?
+    has_plant : bool
+        Is there a plant on the field?
 
-        water: How much water the field received
+    water : int
+        How much water the field received
 
-        sun: How much sun the field received
-
+    sun : int
+        How much sun the field received
     """
 
     def __init__(self):
-        Base.__init__(self, plowed=bool, water=int, sun=int)
-
-    @property
-    def saveable_fields(self):
-        """Returns the fields of the component that can be saved."""
-        fields = list(self.fields.keys())
-        return fields
+        Base.__init__(self, plowed=bool, has_plant=bool, water=int, sun=int)
 
     @classmethod
     def register(cls, name="Field", auto_register=True):
