@@ -121,7 +121,7 @@ class Crops(Base):
         agent_data["position"] = field.Agent.position
         agent_data["behaviour_type"] = "Base"
         crop_data = comp_data["Crop"] = {}
-        crop_data["fruit_id"] = "tomato"
+        crop_data["fruit_id"] = fruit
         crop_data["field_id"] = field.identifier
         identifier = "%s_crop" % field.identifier
         self.world.get_or_create_entity(identifier, comp_data)
