@@ -1,18 +1,1 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<Settings>
-  <Module name="FIFE">
-    <Setting name="FullScreen" type="bool"> False </Setting>
-    <Setting name="PlaySounds" type="bool"> True </Setting>
-    <Setting name="RenderBackend" type="str"> OpenGL </Setting>
-    <Setting name="ScreenResolution" type="str">1024x768</Setting>
-    <Setting name="Lighting" type="int"> 1 </Setting>
-  </Module>
-  <Module name="fife-rpg">
-    <Setting name="ProjectName" type="unicode">Pixel Farm</Setting>
-    <Setting name="ObjectNamespace" type="unicode">pixel_farm</Setting>
-    <Setting name="Behaviours" type="list">Base</Setting>
-    <Setting name="Components" type="list">Field ; Crop ; Moving ; Description</Setting>
-    <Setting name="Systems" type="list">Fields ; Crops</Setting>
-    <Setting name="AgentObjectsPath" type="unicode">objects</Setting>
-  </Module>
-</Settings>
+<Settings>  <Module name="FIFE">    <Setting name="FullScreen" type="bool"> False </Setting>    <Setting name="PlaySounds" type="bool"> True </Setting>    <Setting name="RenderBackend" type="str"> OpenGL </Setting>    <Setting name="ScreenResolution" type="str">1024x768</Setting>    <Setting name="Lighting" type="int"> 1 </Setting>  </Module>  <Module name="fife-rpg">    <Setting name="ProjectName" type="unicode">Pixel Farm</Setting>    <Setting name="ObjectNamespace" type="unicode">pixel_farm</Setting>    <Setting name="Behaviours" type="list">Base</Setting>    <Setting name="Components" type="list">Crop ; Moving ; Field ; Description ; WaterContainer ; Tool ; SeedContainer    </Setting>    <Setting name="Systems" type="list">Fields ; Crops</Setting>    <Setting name="AgentObjectsPath" type="unicode">objects</Setting>    <Setting name="Actions" type="list">Plow ; Water</Setting>  </Module></Settings>

@@ -6,10 +6,12 @@ Actions:
   MoveCamera: fife_rpg.actions.move_camera
   Open: fife_rpg.actions.open
   PickUp: fife_rpg.actions.pick_up
+  Plow: pixel_farm.actions.plow
   Print: actions.print
   Read: fife_rpg.actions.read
   SetGlobalLight: fife_rpg.actions.set_global_light
   Unlock: fife_rpg.actions.unlock
+  Water: pixel_farm.actions.water
 Behaviours:
   Base: fife_rpg.behaviours.base
 Components:
@@ -30,6 +32,9 @@ Components:
   Moving: fife_rpg.components.moving
   RPGEquip: fife_rpg.components.equip
   Readable: fife_rpg.components.readable
+  Tool: pixel_farm.components.tool
+  WaterContainer: pixel_farm.components.water_container
+  SeedContainer: pixel_farm.components.seed_container
 Systems:
   CharacterStatisticSystem: fife_rpg.systems.character_statistics
   Crops: pixel_farm.systems.crops

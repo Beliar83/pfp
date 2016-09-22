@@ -16,3 +16,46 @@ Components:
         run_speed: 1.0
         walk_speed: 1.0
         run_action: walk
+--- !Entity
+Components:
+  Description:
+    desc: A watering can
+    view_name: Watering Can
+  General:
+    identifier: WateringCan
+  WaterContainer:
+    max_water: 30
+    water: 30
+  Tool:
+    v_reach: 3
+    h_reach: 3
+    reach_behind: True
+    tool_type: WateringCan
+--- !Entity
+Components:
+  Description:
+    desc: A plow
+    view_name: Plow
+  General:
+    identifier: Plow
+  Tool:
+    v_reach: 3
+    h_reach: 3
+    reach_behind: False
+    tool_type: Plow
+--- !Entity
+Components:
+  Description:
+    desc: A bag of seeds
+    view_name: Seed bag
+  General:
+    identifier: SeedBag
+  Tool:
+    v_reach: 3
+    h_reach: 3
+    reach_behind: Trued
+    tool_type: Seed
+  SeedContainer:
+    crop: tomato
+    max_seed: 9
+    seed: 9

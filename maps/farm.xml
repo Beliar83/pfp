@@ -1,21 +1,80 @@
 <?xml version="1.0" encoding="ascii" ?>
 <map id="farm" format="1.0">
-    <import file="../objects/plants.xml" />
-    <layer id="terrain" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+  <import file="../objects/pixel_farm.xml"/>
+  <layer id="terrain" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
+         transparency="0" pathing="cell_edges_only" sorting="camera">
+    <instances>
+      <i ns="LPC" o="grass:01" x="-10" y="-1" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="0" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="1" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="2" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="3" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="4" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="5" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-9" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-8" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-7" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-6" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-5" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-4" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-3" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-2" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-1" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="0" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="1" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="2" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="3" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="4" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="5" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="6" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="7" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="5" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="4" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="3" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="2" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="1" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="0" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-1" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-2" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-3" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-4" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-5" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-7" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-8" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-9" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-10" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="8" y="-11" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-2" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-3" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-4" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-5" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-6" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-7" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-8" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-9" z="0" r="0" stackpos="0"/>
+      <i o="grass:01" x="-10" y="-10" z="0" r="0" stackpos="0"/>
+    </instances>
+    </layer>
+  <layer id="fields" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
+         transparency="0" pathing="cell_edges_only" sorting="camera">
         <instances />
     </layer>
-    <layer id="fields" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+  <layer id="items" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
+         transparency="0" pathing="cell_edges_only" sorting="camera">
         <instances />
     </layer>
-    <layer id="items" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+  <layer id="crops" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
+         transparency="0" pathing="cell_edges_only" sorting="camera">
         <instances />
     </layer>
-    <layer id="crops" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
-        <instances />
-    </layer>
-    <layer id="actors" x_offset="0.000000" y_offset="0.000000" z_offset="0.000000" x_scale="1.000000" y_scale="1.000000" rotation="0.000000" grid_type="square" transparency="0" pathing="cell_edges_only" sorting="camera">
+  <layer id="actors" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
+         transparency="0" pathing="cell_edges_only" sorting="camera">
         <instances />
     </layer>
     <cellcaches />
-    <camera id="main" ref_layer_id="terrain" zoom="1.000000" tilt="0.000000" rotation="0.000000" viewport="0,0,1280,720" ref_cell_width="32" ref_cell_height="32" />
+  <camera id="main" ref_layer_id="terrain" zoom="1" tilt="0" rotation="0" viewport="0,0,1280,720" ref_cell_width="32"
+          ref_cell_height="32"/>
 </map>
