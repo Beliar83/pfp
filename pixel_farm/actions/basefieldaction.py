@@ -100,6 +100,20 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
             The field entity to do an action on
         """
 
+    # noinspection PyMethodMayBeStatic
+    def on_cell_processed(self, cell_x, cell_y):
+        """Called after a cell was processed during execution.
+
+        Parameters
+        ----------
+        cell_x : int
+            The x position of the cell
+
+        cell_y : int
+            The y position of the cell
+        """
+        pass
+
     def execute(self):
         """Execute the action
 
@@ -125,6 +139,7 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
                 if self.can_execute_on(entity):
                     self.do_field_action(entity)
                     continue
+            self.on_cell_processed(x, y)
             if not self.can_continue:
                 break
         super().execute()

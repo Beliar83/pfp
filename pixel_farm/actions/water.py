@@ -91,6 +91,21 @@ class Water(BaseFieldAction):
         """
         return super().can_execute_on(entity)
 
+    def on_cell_processed(self, cell_x, cell_y):
+        """Called after a cell was processed during execution.
+
+        Parameters
+        ----------
+        cell_x : int
+            The x position of the cell
+
+        cell_y : int
+            The y position of the cell
+        """
+        self.container.water -= 1
+        if self.container.water < -1:
+            water = -1  # Just to be on the safe side
+
     def do_field_action(self, entity):
         """Do an an action to a field
 
@@ -103,9 +118,6 @@ class Water(BaseFieldAction):
         if not self.can_continue:
             return
         field.water += 1
-        self.container.water -= 1
-        if self.container.water < -1:
-            water = -1  # Just to be on the safe side
 
     @classmethod
     def register(cls, name="Water"):
