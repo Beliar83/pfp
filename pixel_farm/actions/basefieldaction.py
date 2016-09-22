@@ -75,6 +75,21 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
         bool
         """
 
+    def can_execute_on(self, entity):
+        """Whether the action can be used on an entity
+
+        Parameters
+        ----------
+        entity : fife_rpg.RPGEntity
+            The entity to check
+
+        Returns
+        -------
+        bool
+        """
+        return bool(getattr(entity, Field.registered_as))
+
+
     @abstractmethod
     def do_field_action(self, entity):
         """Do an an action to a field
@@ -107,7 +122,7 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
                 origin_instance, y_pos, x_pos)
             for instance in instances:
                 entity = world.get_entity(instance.getId())
-                if getattr(entity, Field.registered_as):
+                if self.can_execute_on(entity):
                     self.do_field_action(entity)
             if not self.can_continue:
                 break

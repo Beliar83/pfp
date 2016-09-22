@@ -77,6 +77,20 @@ class Water(BaseFieldAction):
         """
         return self.container.water != 0
 
+    def can_execute_on(self, entity):
+        """Whether the action can be used on an entity
+
+        Parameters
+        ----------
+        entity : fife_rpg.RPGEntity
+            The entity to check
+
+        Returns
+        -------
+        bool
+        """
+        return super().can_execute_on(entity)
+
     def do_field_action(self, entity):
         """Do an an action to a field
 
