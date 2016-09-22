@@ -124,6 +124,7 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
                 entity = world.get_entity(instance.getId())
                 if self.can_execute_on(entity):
                     self.do_field_action(entity)
+                    continue
             if not self.can_continue:
                 break
         super().execute()
