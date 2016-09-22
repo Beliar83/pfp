@@ -9,6 +9,7 @@
 from fife import fife
 
 import fife_rpg
+from pixel_farm.components.field import Field
 from .basefieldaction import BaseFieldAction
 
 
@@ -66,14 +67,15 @@ class Plow(BaseFieldAction):
         """
         return True
 
-    def do_field_action(self, field):
+    def do_field_action(self, entity):
         """Do an an action to a field
 
         Parameters
         ----------
-        field : Field
-            The field to do an action on
+        entity : fife_rpg.RPGEntity
+            The field entity to do an action on
         """
+        field = getattr(entity, Field.registered_as)
         field.plowed = True
 
     @classmethod

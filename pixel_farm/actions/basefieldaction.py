@@ -76,13 +76,13 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
         """
 
     @abstractmethod
-    def do_field_action(self, field):
+    def do_field_action(self, entity):
         """Do an an action to a field
 
         Parameters
         ----------
-        field : Field
-            The field to do an action on
+        entity : fife_rpg.RPGEntity
+            The field entity to do an action on
         """
 
     def execute(self):
@@ -107,8 +107,8 @@ class BaseFieldAction(six.with_metaclass(ABCMeta, BaseAction)):
                 origin_instance, y_pos, x_pos)
             for instance in instances:
                 entity = world.get_entity(instance.getId())
-                if entity.Field:
-                    self.do_field_action(entity.Field)
+                if getattr(entity, Field.registered_as):
+                    self.do_field_action(entity)
             if not self.can_continue:
                 break
         super().execute()

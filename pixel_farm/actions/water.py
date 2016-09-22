@@ -9,6 +9,7 @@
 from fife import fife
 
 import fife_rpg
+from pixel_farm.components.field import Field
 from pixel_farm.components.water_container import WaterContainer
 from .basefieldaction import BaseFieldAction
 
@@ -76,7 +77,15 @@ class Water(BaseFieldAction):
         """
         return self.container.water != 0
 
-    def do_field_action(self, field):
+    def do_field_action(self, entity):
+        """Do an an action to a field
+
+        Parameters
+        ----------
+        entity : fife_rpg.RPGEntity
+            The field entity to do an action on
+        """
+        field = getattr(entity, Field.registered_as)
         if not self.can_continue:
             return
         field.water += 1
