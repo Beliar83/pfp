@@ -32,7 +32,7 @@ from .actions.water import Water
 from .components.field import Field
 from .components.tool import Tool
 from .gui.selection_grid import SelectionGrid
-from .helper import get_offset_rect
+from .helper import get_offset_rect, get_rotated_cell_offset_coord
 
 TOOLS = Enum(("WateringCan", "Plow", "Seed"))
 
@@ -166,6 +166,7 @@ class Controller(GameSceneController):
             self, view, application, outliner, listener)
         self.selected = None
         self.selection_direction = 0
+        self.__tool = None
         self.tool = None
 
     @property
@@ -186,7 +187,6 @@ class Controller(GameSceneController):
                                                 tool.reach_behind)
         else:
             self.view.select_grid.recreate_grid(1, 1, False)
-
 
     def step(self, time_delta):
         GameSceneController.step(self, time_delta)
@@ -220,65 +220,6 @@ class Controller(GameSceneController):
                 self.selection_direction -= 1
             else:
                 self.selection_direction = 3
-
-    def get_rotated_rect(self, rect, direction):
-        """Calculates the rectangle rotated to the given direction.
-
-        The original rectangle is assumed to be pointing up.
-
-        Parameters
-        ----------
-        rect : fife.Rect
-        direction : int
-            The direction to be rotated to. (0: Up, 1: Right, 2: Down, 3: Left)
-
-        Returns
-        -------
-        fife.Rect
-            The rotated rectangle
-        """
-        if direction == 1:
-            rect = fife.Rect((rect.bottom() - 1) * -1,
-                             rect.getX(),
-                             rect.getH(),
-                             rect.getW())
-        elif direction == 2:
-            rect = fife.Rect((rect.right() - 1) * -1,
-                             (rect.bottom() - 1) * -1,
-                             rect.getW(),
-                             rect.getH())
-        elif direction == 3:
-            rect = fife.Rect(rect.getY(),
-                             (rect.right() - 1) * -1,
-                             rect.getH(),
-                             rect.getW())
-        return rect
-
-    def get_rotated_cell_offset_coord(self, y_pos, x_pos, direction):
-        """Returns the cell offset coordinate rotated to match the direction.
-
-        Parameters
-        ----------
-        y_pos : number
-            The original y position.
-        x_pos : number
-            The original x position.
-        direction : int
-            The direction to rotate to. Origin position is 0 (north) and goes
-            clockwise (east=1, south=2, west=3)
-
-        Returns
-        -------
-        tuple of numbers
-            The modified coordinates
-        """
-        if direction == 1:
-            return x_pos, y_pos * -1
-        elif direction == 2:
-            return y_pos * -1, x_pos * -1
-        elif direction == 3:
-            return x_pos * -1, y_pos
-        return y_pos, x_pos
 
     def get_instances_at_offset(self, instance, y_pos, x_pos):
         """Returns all instances at the offset position from the instance
@@ -338,7 +279,7 @@ class Controller(GameSceneController):
         instances = []
         for row in range(start_row, start_row + height):
             for col in range(start_col, start_col + width):
-                y_pos, x_pos = self.get_rotated_cell_offset_coord(
+                y_pos, x_pos = get_rotated_cell_offset_coord(
                     row, col, self.selection_direction)
                 offset_instances = self.get_instances_at_offset(
                     instance, y_pos, x_pos)

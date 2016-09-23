@@ -82,6 +82,40 @@ def get_rotated_cell_offset_coord(y_pos, x_pos, direction):
     return y_pos, x_pos
 
 
+def get_rotated_rect(self, rect, direction):
+    """Calculates the rectangle rotated to the given direction.
+
+    The original rectangle is assumed to be pointing up.
+
+    Parameters
+    ----------
+    rect : fife.Rect
+    direction : int
+        The direction to be rotated to. (0: Up, 1: Right, 2: Down, 3: Left)
+
+    Returns
+    -------
+    fife.Rect
+        The rotated rectangle
+    """
+    if direction == 1:
+        rect = fife.Rect((rect.bottom() - 1) * -1,
+                         rect.getX(),
+                         rect.getH(),
+                         rect.getW())
+    elif direction == 2:
+        rect = fife.Rect((rect.right() - 1) * -1,
+                         (rect.bottom() - 1) * -1,
+                         rect.getW(),
+                         rect.getH())
+    elif direction == 3:
+        rect = fife.Rect(rect.getY(),
+                         (rect.right() - 1) * -1,
+                         rect.getH(),
+                         rect.getW())
+    return rect
+
+
 def sweep_yield(rect, yield_center=True):
     """Yields each coordinate in the rectangle starting from the leftmost
     centre column and goes around clockwise. The rectangle is processed
