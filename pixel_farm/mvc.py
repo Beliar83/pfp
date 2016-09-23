@@ -30,10 +30,11 @@ from pixel_farm.actions.plow import Plow
 from pixel_farm.actions.sow import Sow
 from .actions.water import Water
 from .components.field import Field
+from .components.tool import Tool
 from .gui.selection_grid import SelectionGrid
 from .helper import get_offset_rect
 
-TOOLS = Enum(("WateringCan", "Plow", "Seeds"))
+TOOLS = Enum(("WateringCan", "Plow", "Seed"))
 
 
 class Listener(GameSceneListener, fife.IKeyListener):
@@ -88,7 +89,7 @@ class Listener(GameSceneListener, fife.IKeyListener):
                              int(cell_rect.getHeight() + 1))
             rect = get_offset_rect(rect, mouse_pos)
 
-            if self.gamecontroller.tool == TOOLS.WateringCan:
+            if self.gamecontroller.tool.tool_type == TOOLS.WateringCan:
                 world = self.gamecontroller.application.world
                 watering_can = world.get_entity("WateringCan")
                 water_action = Water(self.gamecontroller.application,
@@ -96,14 +97,14 @@ class Listener(GameSceneListener, fife.IKeyListener):
                                      watering_can.WaterContainer,
                                      self.gamecontroller.selection_direction)
                 water_action.execute()
-            elif self.gamecontroller.tool == TOOLS.Seeds:
+            elif self.gamecontroller.tool.tool_type == TOOLS.Seed:
                 world = self.gamecontroller.application.world
                 seed_bag = world.get_entity("SeedBag")
                 sow_action = Sow(self.gamecontroller.application,
                                  selected, rect, seed_bag.SeedContainer,
                                  self.gamecontroller.selection_direction)
                 sow_action.execute()
-            elif self.gamecontroller.tool == TOOLS.Plow:
+            elif self.gamecontroller.tool.tool_type == TOOLS.Plow:
                 plow_action = Plow(self.gamecontroller.application, selected,
                                    rect,
                                    self.gamecontroller.selection_direction)
@@ -116,15 +117,16 @@ class Listener(GameSceneListener, fife.IKeyListener):
         assert isinstance(event, fife.KeyEvent)
         key = event.getKey().getValue()
         selected = self.gamecontroller.selected
+        world = self.gamecontroller.application.world
         if key == fife.Key.P:
-            self.gamecontroller.tool = TOOLS.Plow
-            self.gamecontroller.view.select_grid.recreate_grid(3, 3, False)
+            plow = world.get_entity("Plow").Tool
+            self.gamecontroller.tool = plow
         elif key == fife.Key.C:
-            self.gamecontroller.tool = TOOLS.Seeds
-            self.gamecontroller.view.select_grid.recreate_grid(3, 3, True)
+            seed_bag = world.get_entity("SeedBag").Tool
+            self.gamecontroller.tool = seed_bag
         elif key == fife.Key.W:
-            self.gamecontroller.tool = TOOLS.WateringCan
-            self.gamecontroller.view.select_grid.recreate_grid(3, 3, True)
+            watering_can = world.get_entity("WateringCan").Tool
+            self.gamecontroller.tool = watering_can
         elif key == fife.Key.S:
             if selected:
                 selected.Field.sun += 1
@@ -164,7 +166,27 @@ class Controller(GameSceneController):
             self, view, application, outliner, listener)
         self.selected = None
         self.selection_direction = 0
-        self.tool = TOOLS.Plow
+        self.tool = None
+
+    @property
+    def tool(self):
+        """The current tool
+
+        Returns
+        -------
+        Tool
+        """
+        return self.__tool
+
+    @tool.setter
+    def tool(self, tool):
+        self.__tool = tool
+        if tool is not None:
+            self.view.select_grid.recreate_grid(tool.h_reach, tool.v_reach,
+                                                tool.reach_behind)
+        else:
+            self.view.select_grid.recreate_grid(1, 1, False)
+
 
     def step(self, time_delta):
         GameSceneController.step(self, time_delta)
@@ -176,7 +198,8 @@ class Controller(GameSceneController):
         # noinspection PyArgumentList
         PyCEGUI.System.getSingleton().getDefaultGUIContext().setRootWindow(
             self.view.ingame)
-        self.view.select_grid.recreate_grid(3, 3, False)
+        if self.tool is None:
+            self.tool = self.application.world.get_entity("Plow").Tool
 
     def rotate_selection(self, right):
         """Rotate the selection in the given direction
