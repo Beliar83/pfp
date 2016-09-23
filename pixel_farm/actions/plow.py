@@ -67,7 +67,8 @@ class Plow(BaseFieldAction):
         """
         return True
 
-    def can_execute_on(self, entity):
+    @classmethod
+    def can_execute_on(cls, entity):
         """Whether the action can be used on an entity
 
         Parameters
