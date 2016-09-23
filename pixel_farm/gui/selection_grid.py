@@ -6,18 +6,22 @@
 .. moduleauthor:: Karsten Bock <KarstenBock@gmx.net>
 """
 
+from PyCEGUI import Vector2f, GridLayoutContainer
+
 import PyCEGUI
+
+EventMouseEntersArea = PyCEGUI.DefaultWindow.EventMouseEntersArea
+EventMouseLeavesArea = PyCEGUI.DefaultWindow.EventMouseLeavesArea
+EventMouseClick = PyCEGUI.DefaultWindow.EventMouseClick
 
 
 class CellData(object):
-
     def __init__(self):
         self.selected = False
         self.hovered = False
 
 
 class SelectionGrid(object):
-
     """A grid to choose the form and size of a selection
 
     Parameters
@@ -27,19 +31,19 @@ class SelectionGrid(object):
 
     Attributes
     ----------
-    grid_widget : PyCCEGUI.GridLayoutContainer
+    grid_widget : PyCEGUI.GridLayoutContainer
         A GridLayoutContainer that is the base for the grid
     cell_width : PyCEGUI.UDim
         The width of each cell
     cell_height : PyCEGUI.UDim
         The height of each cell
-    cells : list of CellData
+    cells : list[CellData]
         Cell data for each cell.
     cell_rect : PyCEGUI.Rectf
         Rectangle describing the selected cells
     last_hovered : int
         The index of the last hovered cell
-    mouse_cell : list of int
+    mouse_cell : list[int]
         The grid coordinates of the mouse cell
     x_reach : int
         The vertical reach of the selection
@@ -50,11 +54,10 @@ class SelectionGrid(object):
     """
 
     def __init__(self, grid_widget):
-        #: :type grid_widget: PyCEGUI.GridLayoutContainer
         self.grid_widget = grid_widget
-        pcegui_glc = PyCEGUI.GridLayoutContainer
-        self.grid_widget.subscribeEvent(pcegui_glc.EventMouseLeavesArea,
-                                        self.grid_widget_mouse_leave)
+        self.grid_widget.subscribeEvent(
+            GridLayoutContainer.EventMouseLeavesArea,
+            self.grid_widget_mouse_leave)
         self.cell_width = PyCEGUI.UDim(0, 24)
         self.cell_height = PyCEGUI.UDim(0, 24)
         self.cells = []
@@ -80,7 +83,6 @@ class SelectionGrid(object):
             for col in range(width):
                 cell = self.grid_widget.getChildAtPosition(col, row)
                 cell_index = row * width + col
-                #: :type cell_data: CellData
                 cell_data = self.cells[cell_index]
                 alpha = 0.0
                 color = self.select_color
@@ -150,21 +152,18 @@ class SelectionGrid(object):
                         img_colours)
                     new_cell.setProperty("ImageColours",
                                          new_bg_colours_str)
-                    tmp_emea = PyCEGUI.DefaultWindow.EventMouseEntersArea
-                    tmp_emla = PyCEGUI.DefaultWindow.EventMouseLeavesArea
-                    tmp_emc = PyCEGUI.DefaultWindow.EventMouseClick
-                    new_cell.subscribeEvent(tmp_emea,
-                                            lambda args, row=row, col=col:
+                    new_cell.subscribeEvent(EventMouseEntersArea,
+                                            lambda args, p_row=row, p_col=col:
                                             self.grid_widget_cell_mouse_enter(
-                                                args, row, col))
-                    new_cell.subscribeEvent(tmp_emla,
-                                            lambda args, row=row, col=col:
+                                                args, p_row, p_col))
+                    new_cell.subscribeEvent(EventMouseLeavesArea,
+                                            lambda args, p_row=row, p_col=col:
                                             self.grid_widget_cell_mouse_leave(
-                                                args, row, col))
-                    new_cell.subscribeEvent(tmp_emc,
-                                            lambda args, row=row, col=col:
+                                                args, p_row, p_col))
+                    new_cell.subscribeEvent(EventMouseClick,
+                                            lambda args, p_row=row, p_col=col:
                                             self.grid_widget_cell_clicked(
-                                                args, row, col))
+                                                args, p_row, p_col))
 
                     self.grid_widget.addChildToPosition(new_cell, col, row)
                 self.cells.append(CellData())
@@ -177,7 +176,6 @@ class SelectionGrid(object):
         """Resets the selected cells"""
         width = self.grid_widget.getGridWidth()
         tmp_pos = self.cell_rect.getPosition()
-        #: :type tmp_pos: PyCEGUI.Vector2f
         sel_start_col = int(tmp_pos.d_x)
         sel_start_row = int(tmp_pos.d_y)
         sel_cols = int(self.cell_rect.getWidth()) + 1
@@ -192,7 +190,6 @@ class SelectionGrid(object):
             for col in range(sel_start_col, sel_start_col + sel_cols):
                 cell_index = row * width + col
                 cell = self.cells[cell_index]
-                #: :type cell: CellData
                 cell.selected = False
         self.select_color = PyCEGUI.Colour(1.0, 1.0, 1.0, 0)
 
@@ -228,21 +225,18 @@ class SelectionGrid(object):
         """
         in_rect = rect.isPointInRect
         mouse_col, mouse_row = self.mouse_cell
-        Vec2f = PyCEGUI.Vector2f
         is_mouse_near_selection = False
-        #: :type rect: PyCGUI.Rectf
         if not self.reach_behind and int(rect.bottom()) >= mouse_row:
             return False
-        if mouse_col > 0 and in_rect(Vec2f(mouse_col - 1, mouse_row)):
+        if mouse_col > 0 and in_rect(Vector2f(mouse_col - 1, mouse_row)):
             is_mouse_near_selection = True
-        elif (mouse_col < self.cell_width.d_offset and
-              in_rect(Vec2f(mouse_col + 1, mouse_row))):
+        elif (mouse_col < self.cell_width.d_offset and in_rect(Vector2f(
+                    mouse_col + 1, mouse_row))):
             is_mouse_near_selection = True
-        elif (mouse_row > 0 and
-              in_rect(Vec2f(mouse_col, mouse_row - 1))):
+        elif mouse_row > 0 and in_rect(Vector2f(mouse_col, mouse_row - 1)):
             is_mouse_near_selection = True
-        elif (mouse_row < self.cell_height.d_offset and
-              in_rect(Vec2f(mouse_col, mouse_row + 1))):
+        elif (mouse_row < self.cell_height.d_offset and in_rect(Vector2f(
+                mouse_col, mouse_row + 1))):
             is_mouse_near_selection = True
         return is_mouse_near_selection
 
@@ -253,7 +247,7 @@ class SelectionGrid(object):
         Returns
         -------
         bool
-            True if the selection is valid, otherwise alse
+            True if the selection is valid, otherwise False
         """
         return self.is_selection_valid(self.drag_rect)
 
@@ -272,11 +266,10 @@ class SelectionGrid(object):
             True if the cell is in reach, False otherwise
         """
         mouse_col, mouse_row = self.mouse_cell
-        if (row <= mouse_row and row + self.y_reach >= mouse_row or
-                self.reach_behind and
-                (row >= mouse_row and row - self.y_reach <= mouse_row)):
-            if (col <= mouse_col and col + self.x_reach >= mouse_col or
-                    col >= mouse_col and col - self.y_reach <= mouse_col):
+        if (row <= mouse_row <= row + self.y_reach or self.reach_behind and (
+                        row >= mouse_row >= row - self.y_reach)):
+            if (col <= mouse_col <= col + self.x_reach or col >= mouse_col >=
+                    col - self.y_reach):
                 return True
         return False
 
@@ -290,7 +283,6 @@ class SelectionGrid(object):
         row, col : int
             The row and column of the cell
         """
-        #: :type args: PyCEGUI.MouseEventArgs
         if not self.dragging:
             if args.sysKeys & PyCEGUI.SystemKeys.Shift:
                 if self.is_cell_in_reach(row, col):
@@ -302,12 +294,11 @@ class SelectionGrid(object):
             width = self.grid_widget.getGridWidth()
             cell_index = row * width + col
             cell = self.cells[cell_index]
-            #: type cell: CellData
             cell.hovered = True
             self.last_hovered = cell_index
         else:
             left, right, top, bottom = calculate_sel_bounds(
-                self.start_drag, (row, col))
+                self.drag_start, (row, col))
             if right - left > self.x_reach:
                 right -= left
             if bottom - top > self.y_reach:
@@ -322,6 +313,7 @@ class SelectionGrid(object):
             else:
                 self.drag_color = PyCEGUI.Colour(1, 0, 0, 0)
 
+    # noinspection PyUnusedLocal
     def grid_widget_cell_mouse_leave(self, args, row, col):
         """Called when the mouse leaves a cell of the grid
 
@@ -332,12 +324,10 @@ class SelectionGrid(object):
         row, col : int
             The row and column of the cell
         """
-        #: :type args: PyCEGUI.MouseEventArgs
         if not self.dragging:
             width = self.grid_widget.getGridWidth()
             cell_index = row * width + col
             cell = self.cells[cell_index]
-            #: type cell: CellData
             cell.hovered = False
 
     def start_selection(self, row, col):
@@ -349,7 +339,7 @@ class SelectionGrid(object):
             The row and column of the cell
         """
         self.dragging = True
-        self.start_drag = (row, col)
+        self.drag_start = (row, col)
         self.drag_rect.d_min = PyCEGUI.Vector2f(col, row)
         self.drag_rect.d_max = PyCEGUI.Vector2f(col, row)
         width = self.grid_widget.getGridWidth()
@@ -367,12 +357,12 @@ class SelectionGrid(object):
         row, col : int
             The row and column of the cell
         """
-        if not (self.is_drag_selection_valid() and
-                self.is_cell_in_reach(row, col)):
+        if not (self.is_drag_selection_valid() and self.is_cell_in_reach(row,
+                                                                         col)):
             return
         self.dragging = False
         left, right, top, bottom = calculate_sel_bounds(
-            self.start_drag, (row, col))
+            self.drag_start, (row, col))
         self.cell_rect.d_min.d_x = left
         self.cell_rect.d_min.d_y = top
         self.cell_rect.d_max.d_x = right + 0.9
@@ -392,7 +382,6 @@ class SelectionGrid(object):
         row, col : int
             The row and column of the cell
         """
-        #: :type args: PyCEGUI.MouseEventArgs
         if args.button == PyCEGUI.MouseButton.LeftButton:
             if args.sysKeys & PyCEGUI.SystemKeys.Shift:
                 if not self.dragging:
@@ -412,6 +401,7 @@ class SelectionGrid(object):
             if self.dragging:
                 self.cancel_selection()
 
+    # noinspection PyUnusedLocal
     def grid_widget_mouse_leave(self, args):
         """Called when the mouse enters the grid area
 
@@ -422,7 +412,6 @@ class SelectionGrid(object):
         """
         if self.last_hovered >= 0:
             last_cell = self.cells[self.last_hovered]
-            #: type last_cell: CellData
             last_cell.hovered = False
             self.last_hovered = -1
 
@@ -432,9 +421,9 @@ def calculate_sel_bounds(start, end):
 
     Parameters
     ----------
-    start : list
+    start : tuple[int]
         The cell where the selection starts
-    end : list
+    end : tuple[int]
         The cell where the selection ends
 
     Returns
@@ -452,10 +441,6 @@ def calculate_sel_bounds(start, end):
     start_x = start[1]
     end_y = end[0]
     end_x = end[1]
-    left = -1
-    right = -1
-    top = -1
-    bottom = -1
     if start_x < end_x:
         left = start_x
         right = end_x

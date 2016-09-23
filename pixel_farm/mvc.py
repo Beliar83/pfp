@@ -81,7 +81,6 @@ class Listener(GameSceneListener, fife.IKeyListener):
         if selected:
             mouse_cell = self.gamecontroller.view.select_grid.mouse_cell
             cell_rect = self.gamecontroller.view.select_grid.cell_rect
-            #: :type cell_rect: PyCEGUI.Rectf
             mouse_pos = fife.Point(*mouse_cell)
             rect = fife.Rect(int(cell_rect.d_min.d_x),
                              int(cell_rect.d_min.d_y),
@@ -235,15 +234,12 @@ class Controller(GameSceneController):
 
         Returns
         -------
-        list of fife.Instance
+        list[fife.Instance]
             The instances at the offset position
         """
         camera = self.application.current_map.camera
-
         location = instance.getLocation()
-        #: :type location: fife.Location
         coords = location.getLayerCoordinates()
-        #: :type coords: fife.Point3D
         coords.x += x_pos
         coords.y += y_pos
         location.setLayerCoordinates(coords)
@@ -265,7 +261,7 @@ class Controller(GameSceneController):
 
         Returns
         -------
-        list of fife.Instance
+        list[fife.Instance]
             The instances inside the rectangle
         """
 
@@ -275,7 +271,6 @@ class Controller(GameSceneController):
         width = rect.getW()
         height = rect.getH()
         world = application.world
-        #: :type world: fife_rpg.RPGWorld
         instances = []
         for row in range(start_row, start_row + height):
             for col in range(start_col, start_col + width):
@@ -296,16 +291,13 @@ class Controller(GameSceneController):
     def update_selector(self, instance=None):
         application = self.application
         game_map = application.current_map
-        #: :type game_map: fife_rpg.Map
         camera = game_map.camera
-        #: :type camera: fife.Camera
 
         if instance is None:
             if self.selected:
                 instance = self.selected.FifeAgent.instance
             else:
                 return
-        #: :type instance: fife.Instance
         generic = fife.GenericRenderer.getInstance(camera)
         inst_renderer = fife.InstanceRenderer.getInstance(camera)
 
@@ -316,7 +308,6 @@ class Controller(GameSceneController):
 
         mouse_cell = self.view.select_grid.mouse_cell
         cell_rect = self.view.select_grid.cell_rect
-        #: :type cell_rect: PyCEGUI.Rectf
         mouse_pos = fife.Point(*mouse_cell)
         rect = fife.Rect(int(cell_rect.d_min.d_x),
                          int(cell_rect.d_min.d_y),
@@ -367,13 +358,22 @@ class Controller(GameSceneController):
 
 
 class View(GameSceneView):
+    """The View for this game
+
+    Attributes
+    ----------
+    ingame : PyCEGUI.DefaultWindow
+        The main widget
+
+    select_grid : PyCEGUI.GridLayoutContainer
+        The selection grid
+    """
+
     def __init__(self, application):
         super(View, self).__init__(application)
-        #: :type ingame: PyCEGUI.DefaultWindow
         # noinspection PyArgumentList
         ingame = PyCEGUI.WindowManager.getSingleton().loadLayoutFromFile(
             "ingame.layout")
         self.ingame = ingame
-        #: :type select_grid: PyCEGUI.GridLayoutContainer
         select_grid = ingame.getChild("SelectGrid")
         self.select_grid = SelectionGrid(select_grid)

@@ -19,8 +19,6 @@ def get_offset_rect(rect, mouse_pos):
     mouse_pos : fife.Point
         The mouse position
     """
-    #: :type rect: fife.Rect
-    #: :type mouse_pos: fife.Point
     start_pos_x = int(rect.getX() - mouse_pos.getX())
     start_pos_y = int(rect.getY() - mouse_pos.getY())
     ret_rect = fife.Rect(start_pos_x, start_pos_y, rect.getW(), rect.getH())
@@ -41,13 +39,11 @@ def get_instances_at_offset(camera, instance, y_pos, x_pos):
 
     Returns
     -------
-    list of fife.Instance
+    list[fife.Instance]
         The instances at the offset position
     """
     location = instance.getLocation()
-    #: :type location: fife.Location
     coords = location.getLayerCoordinates()
-    #: :type coords: fife.Point3D
     coords.x += x_pos
     coords.y += y_pos
     location.setLayerCoordinates(coords)
@@ -137,7 +133,6 @@ def sweep_yield(rect, yield_center=True):
     yield_center : bool
         Whether to include the center coordinates(0,0) or not.
     """
-    #: :type rect: fife.Rect
     x_start = rect.getX()
     x_end = rect.right()
     y_start = rect.bottom() - 1
