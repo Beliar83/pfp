@@ -329,6 +329,7 @@ class Controller(GameSceneController):
         else:
             color = [255, 255, 255]
         for offset_instance in instances:
+            cell_color = color
             quad_node1 = fife.RendererNode(offset_instance)
             quad_node1.setRelative(fife.Point(-16, -16))
             quad_node2 = fife.RendererNode(offset_instance)
@@ -337,14 +338,30 @@ class Controller(GameSceneController):
             quad_node3.setRelative(fife.Point(16, 16))
             quad_node4 = fife.RendererNode(offset_instance)
             quad_node4.setRelative(fife.Point(16, -16))
+            entity = self.application.world.get_entity(offset_instance.getId())
+            if self.tool is None:
+                pass
+            else:
+                tool_type = self.tool.tool_type
+                if tool_type == TOOLS.WateringCan:
+                    tool_action = Water
+                elif tool_type == TOOLS.Seed:
+                    tool_action = Sow
+                elif tool_type == TOOLS.Plow:
+                    tool_action = Plow
+                else:
+                    raise ValueError("%s is not a valid tool type" % (
+                        tool_type))
+                if not tool_action.can_execute_on(entity):
+                    cell_color = [255, 0, 0]
             generic.addLine("Selector", quad_node1, quad_node2,
-                            *color)
+                            *cell_color)
             generic.addLine("Selector", quad_node2, quad_node3,
-                            *color)
+                            *cell_color)
             generic.addLine("Selector", quad_node3, quad_node4,
-                            *color)
+                            *cell_color)
             generic.addLine("Selector", quad_node4, quad_node1,
-                            *color)
+                            *cell_color)
 
         quad_node1 = fife.RendererNode(instance)
         quad_node1.setRelative(fife.Point(-16, -16))
