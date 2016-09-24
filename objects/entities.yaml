@@ -13,7 +13,7 @@ Components:
     General:
         identifier: PlayerCharacter
     Moving:
-        run_speed: 1.0
+        run_speed: 2.5
         walk_speed: 1.0
         run_action: walk
 --- !Entity
