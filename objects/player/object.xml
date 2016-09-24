@@ -1,15 +1,15 @@
 <?fife type="object"?>
 <object blocking="1" id="player" namespace="LPC" static="0">
 	<action id="stand">
-		<animation atlas="stand.png" height="64" width="64">
-			<direction delay="130" dir="90" frames="1"/>
+		<animation atlas="stand.png" height="64" width="64" y_offset="-25">
+			<direction delay="130" dir="90" frames="1" />
 			<direction delay="130" dir="180" frames="1"/>
 			<direction delay="130" dir="270" frames="1"/>
 			<direction delay="130" dir="0" frames="1"/>
 		</animation>
 	</action>
 	<action id="walk">
-		<animation atlas="walk.png" height="64" width="64">
+		<animation atlas="walk.png" height="64" width="64" y_offset="-25">
 			<direction delay="130" dir="90" frames="8"/>
 			<direction delay="130" dir="180" frames="8"/>
 			<direction delay="130" dir="270" frames="8"/>
@@ -17,7 +17,7 @@
 		</animation>
 	</action>
 	<action id="die">
-		<animation atlas="die.png" height="64" width="64">
+		<animation atlas="die.png" height="64" width="64" y_offset="-25">
 			<direction delay="130" dir="0" frames="6"/>
 		</animation>
 	</action>
