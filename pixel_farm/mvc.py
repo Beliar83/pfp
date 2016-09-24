@@ -88,7 +88,9 @@ class Listener(GameSceneListener, fife.IKeyListener):
                              int(cell_rect.getHeight() + 1))
             rect = get_offset_rect(rect, mouse_pos)
 
-            if self.gamecontroller.tool.tool_type == TOOLS.WateringCan:
+            if self.gamecontroller.tool is None:
+                pass
+            elif self.gamecontroller.tool.tool_type == TOOLS.WateringCan:
                 world = self.gamecontroller.application.world
                 watering_can = world.get_entity("WateringCan")
                 water_action = Water(self.gamecontroller.application,
@@ -126,6 +128,8 @@ class Listener(GameSceneListener, fife.IKeyListener):
         elif key == fife.Key.W:
             watering_can = world.get_entity("WateringCan").Tool
             self.gamecontroller.tool = watering_can
+        elif key == fife.Key.U:
+            self.gamecontroller.tool = None
         elif key == fife.Key.S:
             if selected:
                 selected.Field.sun += 1
@@ -185,7 +189,7 @@ class Controller(GameSceneController):
             self.view.select_grid.recreate_grid(tool.h_reach, tool.v_reach,
                                                 tool.reach_behind)
         else:
-            self.view.select_grid.recreate_grid(1, 1, False)
+            self.view.select_grid.recreate_grid(0, 0, False)
 
     def step(self, time_delta):
         GameSceneController.step(self, time_delta)
@@ -197,8 +201,6 @@ class Controller(GameSceneController):
         # noinspection PyArgumentList
         PyCEGUI.System.getSingleton().getDefaultGUIContext().setRootWindow(
             self.view.ingame)
-        if self.tool is None:
-            self.tool = self.application.world.get_entity("Plow").Tool
 
     def rotate_selection(self, right):
         """Rotate the selection in the given direction
