@@ -8,6 +8,8 @@
 
 from fife import fife
 
+from fife_rpg.actions.base import BaseAction
+
 
 def get_offset_rect(rect, mouse_pos):
     """Offset the rect so the boundaries are relative to the mouse_pos
@@ -152,3 +154,24 @@ def sweep_yield(rect, yield_center=True):
                 if y == 0 and x == 0:
                     continue
                 yield y, x
+
+
+def play_and_execute(instance, animation, direction, action):
+    """Play an animation on the instance and do the action
+
+    Parameters
+    ----------
+    instance : fife.Instance
+        The instance to play the animation on
+
+    animation : str
+        The name of the animaton to play
+
+    direction : int
+        The direction the instance should face for the animation.
+
+    action : BaseAction
+        The action to execute
+    """
+    instance.actOnce(animation, direction)
+    action.execute()

@@ -2,7 +2,8 @@
 <map id="farm" format="1.0">
   <import file="../objects/pixel_farm.xml"/>
   <layer id="terrain" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
-         transparency="0" pathing="cell_edges_only" sorting="camera">
+         transparency="0" pathing="cell_edges_and_diagonals" sorting="camera" layer_type="interact"
+         layer_type_id="actors">
     <instances>
       <i ns="LPC" o="grass:01" x="-10" y="-1" z="0" r="0" stackpos="0"/>
       <i o="grass:01" x="-10" y="0" z="0" r="0" stackpos="0"/>
@@ -59,19 +60,20 @@
     </instances>
     </layer>
   <layer id="fields" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
-         transparency="0" pathing="cell_edges_only" sorting="camera">
+         transparency="0" pathing="cell_edges_and_diagonals" sorting="camera" layer_type="interact"
+         layer_type_id="actors">
         <instances />
     </layer>
   <layer id="items" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
-         transparency="0" pathing="cell_edges_only" sorting="camera">
+         transparency="0" pathing="cell_edges_and_diagonals" sorting="camera">
         <instances />
     </layer>
   <layer id="crops" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
-         transparency="0" pathing="cell_edges_only" sorting="camera">
+         transparency="0" pathing="cell_edges_and_diagonals" sorting="camera">
         <instances />
     </layer>
   <layer id="actors" x_offset="0" y_offset="0" z_offset="0" x_scale="1" y_scale="1" rotation="0" grid_type="square"
-         transparency="0" pathing="cell_edges_only" sorting="camera">
+         transparency="0" pathing="cell_edges_and_diagonals" sorting="camera" layer_type="walkable">
         <instances />
     </layer>
     <cellcaches />

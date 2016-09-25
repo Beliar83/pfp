@@ -1,14 +1,9 @@
 # pylint: disable=unused-import
-import PyCEGUI  # @UnusedImport # PyCEGUI won't work otherwise (on windows)
-import PyCEGUIOpenGLRenderer  # @UnusedImport
 # pylint: enable=unused-import
 
 from fife.extensions.fife_settings import Setting
 
-#from fife_rpg.game_scene import GameSceneController, GameSceneView
-
 from pixel_farm.application import Application
-from pixel_farm.systems.crops import Crops
 from pixel_farm.mvc import Controller, View
 
 TDS = Setting(app_name="Pixel Farm", settings_file="./settings.xml")
@@ -19,7 +14,7 @@ def main():
     app.load_components("combined.yaml")
     app.register_components()
     app.load_actions("combined.yaml")
-    # app.register_actions()
+    app.register_actions()
     app.load_systems("combined.yaml")
     app.register_systems()
     app.load_behaviours("combined.yaml")

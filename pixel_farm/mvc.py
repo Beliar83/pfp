@@ -23,11 +23,13 @@
 import PyCEGUI
 from fife import fife
 
+from fife_rpg.components.fifeagent import approach_and_execute
 from fife_rpg.game_scene import (GameSceneController, GameSceneView,
                                  GameSceneListener)
 from fife_rpg.helpers import Enum
 from pixel_farm.actions.plow import Plow
 from pixel_farm.actions.sow import Sow
+from pixel_farm.helper import play_and_execute
 from .actions.water import Water
 from .components.field import Field
 from .components.tool import Tool
@@ -78,7 +80,13 @@ class Listener(GameSceneListener, fife.IKeyListener):
     def mousePressed(self, event):
         GameSceneListener.mousePressed(self, event)
         selected = self.gamecontroller.selected
-        if selected:
+        player = self.gamecontroller.application.world.get_entity(
+            "PlayerCharacter")
+        point = fife.ScreenPoint(event.getX(), event.getY())
+        app = self.gamecontroller.application
+        location = app.screen_coords_to_map_coords([event.getX(),
+                                                    event.getY()], "actors")
+        if selected and self.gamecontroller.tool is not None:
             mouse_cell = self.gamecontroller.view.select_grid.mouse_cell
             cell_rect = self.gamecontroller.view.select_grid.cell_rect
             mouse_pos = fife.Point(*mouse_cell)
@@ -87,29 +95,53 @@ class Listener(GameSceneListener, fife.IKeyListener):
                              int(cell_rect.getWidth()) + 1,
                              int(cell_rect.getHeight() + 1))
             rect = get_offset_rect(rect, mouse_pos)
+            screen_x = event.getX()
+            screen_y = event.getY()
+            action = None
+            if self.gamecontroller.selection_direction == 0:
+                direction = 90
+            elif self.gamecontroller.selection_direction == 1:
+                direction = 0
+            elif self.gamecontroller.selection_direction == 2:
+                direction = 270
+            else:
+                direction = 180
+            if rect.getH() == 1 and rect.getW() == 1:
+                layer_coords = location.getLayerCoordinates()
+                if self.gamecontroller.selection_direction == 0:
+                    layer_coords.y += 1
+                elif self.gamecontroller.selection_direction == 1:
+                    layer_coords.x -= 1
+                elif self.gamecontroller.selection_direction == 2:
+                    layer_coords.y -= 1
+                else:
+                    layer_coords.x += 1
+                location.setLayerCoordinates(layer_coords)
 
-            if self.gamecontroller.tool is None:
-                pass
-            elif self.gamecontroller.tool.tool_type == TOOLS.WateringCan:
+            if self.gamecontroller.tool.tool_type == TOOLS.WateringCan:
                 world = self.gamecontroller.application.world
                 watering_can = world.get_entity("WateringCan")
-                water_action = Water(self.gamecontroller.application,
-                                     selected, rect,
-                                     watering_can.WaterContainer,
-                                     self.gamecontroller.selection_direction)
-                water_action.execute()
+                action = Water(self.gamecontroller.application,
+                               selected, rect,
+                               watering_can.WaterContainer,
+                               self.gamecontroller.selection_direction)
             elif self.gamecontroller.tool.tool_type == TOOLS.Seed:
                 world = self.gamecontroller.application.world
                 seed_bag = world.get_entity("SeedBag")
-                sow_action = Sow(self.gamecontroller.application,
-                                 selected, rect, seed_bag.SeedContainer,
-                                 self.gamecontroller.selection_direction)
-                sow_action.execute()
+                action = Sow(self.gamecontroller.application,
+                             selected, rect, seed_bag.SeedContainer,
+                             self.gamecontroller.selection_direction)
             elif self.gamecontroller.tool.tool_type == TOOLS.Plow:
-                plow_action = Plow(self.gamecontroller.application, selected,
-                                   rect,
-                                   self.gamecontroller.selection_direction)
-                plow_action.execute()
+                action = Plow(self.gamecontroller.application, selected,
+                              rect,
+                              self.gamecontroller.selection_direction)
+            if action is not None:
+                approach_and_execute(player, location,
+                                     callback=lambda: play_and_execute(
+                                         player.FifeAgent.instance, "stand",
+                                         direction, action))
+        else:
+            approach_and_execute(player, location)
 
     def keyPressed(self, event):
         pass
